@@ -8,12 +8,12 @@
   </a>
   <nav id="navbar" class="navbar">
     <ul>
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">Diagnosa</a></li>
-      <li><a href="blog.html">Tentang</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="">Diagnosa</a></li>
+      <li><a href="/Pengguna/Layouts/tentang">Tentang</a></li>
       <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
         <ul>
-          <li><a href="#">Penyakit</a></li>
+          <li><a href="/Pengguna/Layouts">Penyakit</a></li>
           <li><a href="#">Penggunaan</a></li>
            {{-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
@@ -26,6 +26,7 @@
           </li> --}}
         </ul>
       </li>
+      <li><a href="">Login</a></li>
     </ul>
   </nav><!-- .navbar -->
 

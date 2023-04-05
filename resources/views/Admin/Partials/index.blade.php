@@ -38,9 +38,12 @@
     <div>
         @include('Admin.Partials.header')
         @include('Admin.Partials.sidebar')
-        @include('Admin.Partials.body')
-        @include('Admin.Partials.footer')
+        <div>
+          @yield('container')
+        </div>
+        
     </div>
+    @include('Admin.Partials.footer')
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   </body>

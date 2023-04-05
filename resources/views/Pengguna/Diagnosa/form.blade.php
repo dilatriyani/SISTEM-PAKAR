@@ -1,15 +1,7 @@
+@extends('Pengguna.Partials.index')
+@section('container')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @include('Pengguna.Partials.link')
-</head>
 <body>
-    @include('Pengguna.Partials.header')
     <div class="container p-5">
         <div class="card p-5">
          
@@ -60,7 +52,6 @@
             </div>
         </div>
     </div>
-    @include('Pengguna.Partials.footer')
 </body>
-</html>
+@endsection
     
