@@ -17,7 +17,7 @@
 
 <div class="form-group">
     <label>Deskripsi</label>
-    <input type="text" name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" value="{{ $edit->deskripsi }}" required>
+    <input type="text" name="deskripsi" id="ubah" class="form-control @error('deskripsi') is-invalid @enderror" value="{{ $edit->deskripsi }}" required>
     @error('deskripsi')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
@@ -25,7 +25,7 @@
 
 <div class="form-group">
     <label>Solusi</label>
-    <input type="text" name="solusi" class="form-control @error('solusi') is-invalid @enderror" value="{{ $edit->solusi }}" required>
+    <input type="text" name="solusi" id="edit" class="form-control @error('solusi') is-invalid @enderror" value="{{ $edit->solusi }}" required>
     @error('solusi')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
@@ -33,4 +33,7 @@
 
 <script>
     CKEDITOR.replace('ubah');
+</script>
+<script>
+    CKEDITOR.replace('edit');
 </script>

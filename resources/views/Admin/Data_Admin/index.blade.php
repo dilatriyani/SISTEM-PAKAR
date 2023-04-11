@@ -2,11 +2,11 @@
 @section('container')
 <main id="main" class="main">
 <div >
-    <h1>Data Admin</h1>
+    <h1>Data User</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
-            <li class="breadcrumb-item active">Data Admin</li>
+            <li class="breadcrumb-item"><a href="index.html">User</a></li>
+            <li class="breadcrumb-item active">Data User</li>
         </ol>
     </nav>
     <div class="p-2 ">

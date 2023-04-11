@@ -72,14 +72,14 @@
       </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed"  href="/Admin/Rule">
           <i class="bi bi-bar-chart"></i><span>Rule</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
       </li><!-- End Charts Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Tentang Penyakit</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" href="/Admin/Artikel">
+          <i class="bi bi-gem"></i><span> Data Artikels</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
       </li><!-- End Icons Nav -->
       <li class="nav-item">

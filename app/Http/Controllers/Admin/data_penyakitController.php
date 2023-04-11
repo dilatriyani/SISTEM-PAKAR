@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Models\data_penyakit;
+use App\Models\gejala;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,14 @@ class data_penyakitController extends Controller
     public function index()
     {
         $data = [
-            "data_penyakit" => data_penyakit::all()
+            "data_penyakit" => data_penyakit::all(),
+            "data_gejala" => gejala::all()
         ];
 
         return view('Admin.Data_Penyakit.index', $data);
     }
+
+
 
     public function store(Request $request)
     {
@@ -66,9 +70,6 @@ class data_penyakitController extends Controller
     // 
     public function destroy($id)
     {
-        //delete image
-        // Storage::delete('public/posts/'. $post->image);
-
         //delete post
         $data_penyakit = data_penyakit::findOrFail($id);
         $data_penyakit->delete();
