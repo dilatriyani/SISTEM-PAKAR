@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class gejala extends Model
 {
     use HasFactory;
+    
+    protected $table = "gejalas";
 
     protected $guarded = [' '];
 
+
     public function data_penyakit()
     {
-        return $this->belongsTo(data_penyakit::class);
+        return $this->belongsTo("App\Models\data_penyakit", "kd_penyakit", "id");
     }
 }

@@ -34,9 +34,9 @@
                         @foreach ($data_gejala as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->nama_gejala }}</td>
+                                <td>{!! $item->nama_gejala !!}</td>
                                 <td>{{ $item->kd_gejala }}</td>
-                                <td>{{ $item->kd_penyakit }}</td>
+                                <td>{{ $item->data_penyakit->kd_penyakit }}</td>
                                 <td style="size: 30px;" class="row">
                                     <div class="col-md-4 text-end">
                                         <button onclick="editgejala({{ $item->id }})" class="btn btn-primary"
@@ -81,38 +81,39 @@
                         </h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action=" " method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('/Admin/Data_Gejala') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group mb-1">
                                 <label for="nama_gejala">Tambahkan Gejala</label>
                                 <textarea type="text" class="form-control" name="nama_gejala" id="nama_gelaja" placeholder="""
-                                @error('nama_gejala') is-invalid @enderror value="{{ old('nama_gejala') }}"></textarea>
-                    @error('nama_gejala')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                                    @error('nama_gejala') is-invalid @enderror value="{{ old('nama_gejala') }}"></textarea>
+                                @error('nama_gejala')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-1">
                                 <label for="gejala">Kode gejala</label>
                                 <input type="text" class="form-control" name="kd_gejala" id="kd_gelaja" placeholder=""
-                                @error('kd_gejala') is-invalid @enderror value="{{ old('kd_gejala') }}">
-                    @error('kd_gejala')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                                    @error('kd_gejala') is-invalid @enderror value="{{ old('kd_gejala') }}">
+                                @error('kd_gejala')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
-                            </div>
-                            <div class="form-group mb-1">
-                                <select class="form-control select2" aria-label="Default select example" name="kd_penyakit" id="kd_penyakit">
-                                    <option selected>Pilih kode penyakit</option>
-                                   @foreach ($data_penyakit as $item)
+                        </div>
+                        <div class="form-group mb-1">
+                            <select class="form-control select2" aria-label="Default select example" name="kd_penyakit"
+                                id="kd_penyakit">
+                                <option selected>Pilih kode penyakit</option>
+                                @foreach ($data_penyakit as $item)
                                     <option value="{{ $item->id }}">{{ $item->kd_penyakit }}</option>
-                                    @endforeach
-                                </select>
+                                @endforeach
+                            </select>
+                        </div>
 
-                            </div>
-        
+
                         <div class="modal-footer d-md-block">
                             <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                             <button type="button" class="btn btn-danger btn-sm">Batal</button>
@@ -164,11 +165,12 @@
             }
         </script>
 
-<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+        <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 
-<script>
-    CKEDITOR.replace('nama_gejala');
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            CKEDITOR.replace('nama_gejala');
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </main>
 @endsection
+ 

@@ -49,7 +49,7 @@ class data_gejalaController extends Controller
         gejala::where("id", $request->id)->update([
             'nama_gejala' => $request->nama_gejala,
             'kd_gejala' => $request->kd_gejala,
-            'kd_penyakit' => $request->kd_penyakit,
+            'penyakit_id' => $request->penyakit_id,
         ]);
 
         return back()->with('success', 'Data Penyakit berhasil diupdate');

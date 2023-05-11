@@ -18,16 +18,8 @@ class data_penyakitController extends Controller
         return view('Admin.Data_Penyakit.index', $data);
     }
 
-
-
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'kd_penyakit' => 'kd_penyakit',
-        //     'nama_penyakit' => 'nama_penyakit',
-        //     'deskripsi' => 'deskripsi',
-        //     'solusi' => 'solusi',
-        // ]);
 
         data_penyakit::create([
             'kd_penyakit' => $request->kd_penyakit,

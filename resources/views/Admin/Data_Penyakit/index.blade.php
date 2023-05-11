@@ -87,8 +87,8 @@
                             <div class="form-group mb-1">
                                 <label for="kd_penyakit">Kode Penyakit</label>
                                 <input type="text" class="form-control" name="kd_penyakit" id="kd_penyakit"
-                                    placeholder="Input Kode Penyakit" 
-                                    @error('kd_penyakit') is-invalid @enderror value="{{ old('kd_penyakit') }}">
+                                    placeholder="Input Kode Penyakit" @error('kd_penyakit') is-invalid @enderror
+                                    value="{{ old('kd_penyakit') }}">
                                 @error('kd_penyakit')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -104,20 +104,12 @@
                             </div>
                             <div class="form-group mb-1">
                                 <label for="deskripsi">Deskripsi</label>
-                                <input type="text" class="form-control" name="deskripsi" id="isi" placeholder=""
-                                    @error('deskripsi') is-invalid @enderror value="{{ old('deskripsi') }}">
-                                @error('deskripsi')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                             
+                                <textarea name="deskripsi" id="deskripsi" cols="30" rows="10"></textarea>
                             </div>
                             <div class="form-group mb-1">
                                 <label for="solusi">Solusi</label>
-                                <input type="text" class="form-control" name="solusi" id="solusi" placeholder=""
-                                    @error('solusi') is-invalid @enderror value="{{ old('solusi') }}">
-                                @error('solusi')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <textarea name="solusi" id="solusi" cols="30" rows="10"></textarea>
+
                             </div>
                         </div>
                         <div class="modal-footer d-md-block">
@@ -131,8 +123,7 @@
         {{-- end --}}
 
         <!-- Modal Edit -->
-        <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" style="width: 80%">
                 <div class="modal-content" style="width: 80%">
                     <div class="modal-header hader">
@@ -157,16 +148,18 @@
         </div>
         <!-- END -->
         <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace('isi');
-</script>
-<script>
-    CKEDITOR.replace('solusi');
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(function() {
+                CKEDITOR.replace('deskripsi');
+            })
+        </script>
+        <script>
+            CKEDITOR.replace('solusi');
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </main>
 @endsection
- 
+
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script type="text/javascript">
