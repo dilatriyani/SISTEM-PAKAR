@@ -24,71 +24,110 @@
     <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Nama</th>
+            <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Role</th>
             <th scope="col">Aksi</th>
         </tr>
     </thead>
     <tbody>
+        @foreach ($user as $item)
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>mark@gmail.com</td>
-            <td>Markkeuuu</td>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $item->name }}</td> 
+            <td>{{ $item->email }}</td>
+            <td>{{ $item->password }}</td>
+            <td>{{ $item->role }}</td>
+            
             <td class="p-2">
-                <button class="btn btn-primary col-sm-4">Edit</button>
-                <button class="btn btn-danger col-sm-4">Hapus</button>
+                {{-- <button class="btn btn-primary col-sm-4">Edit</button> --}}
+                <div class="col-md-4 text-start">
+                    <form onsubmit="return confirm('Apakah anda yakin ?');"
+                        action="{{ route('Data_Admin.destroy', $item->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit">
+                            <a href="/Data_Admin/{{ $item->id }}" method="post"
+                                onsubmit="return confirm('Apakah anda yakin ?');"><i
+                                    class="bx bxs-trash" style=color:white></i>
+                            </a>
+                        </button>
+                    </form>
+                </div>
             </td>
         </tr>
+        @endforeach
     </tbody>
     </table>
       
    </div>
 </div>
 
-<div class="modal fade" id="exampleModalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content p-3">
-        <div class="modal-header hader">
-            <h3 class="modal-title" id="exampleModalLabel">
-                Tambah Data Admin
-            </h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action=" " method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-body">
-                <div class="form-group mb-1">
-                    <label for="Username">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" placeholder="">
-                    {{-- @error('judul') is-invalid @enderror value="{{ old('judul') }}">
-                    @error('judul')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror --}}
-                </div>
-                <div class="form-group mb-1">
-                    <label for="baris1">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Example@gmail.com">
-                    {{-- @error('subjudul') is-invalid @enderror value="{{ old('subjudul') }}">
-                    @error('subjudul')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror --}}
-                </div>
-                <div class="form-group">
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="text" name="isi" class="my-editor form-control" id="my-editor" cols="30" rows="10">
+{{-- modal tambah admin --}}
+        <div class="modal fade" id="exampleModalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" style="width: 125%">
+                <div class="modal-content p-3" style="width: 125%">
+                    <div class="modal-header hader">
+                        <h3 class="modal-title" id="exampleModalLabel">
+                            Tambah Data Admin
+                        </h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form action="{{ url('/Admin/Data_Admin') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+
+                            <div class="form-group mb-1">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" name="name" id="name"
+                                    placeholder="Input name" @error('name') is-invalid @enderror
+                                    value="">
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mb-1">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" name="email" id="email"
+                                    placeholder="Input email" @error('email') is-invalid @enderror
+                                    value="{{ old('email') }}">
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                           
+                            <div class="form-group mb-1">
+                                <label for="password">password</label>
+                                <input type="pasword" class="form-control" name="password" id="password"
+                                    placeholder="" @error('password') is-invalid @enderror
+                                    >
+                                @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                           
+                            <div class="form-group mb-1">
+                                <label for="role">Role</label>
+                                <select class="form-control select2" aria-label="Default select example" name="role"
+                                    id="role">
+                                    <option selected>Pilih Sebagai</option>
+                                    <option value="pakar">Pakar</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+    
+
+                        </div>
+                        <div class="modal-footer d-md-block">
+                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                            <button type="button" class="btn btn-danger btn-sm">Batal</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="modal-footer d-md-block">
-                <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                <button type="button" class="btn btn-danger btn-sm">Batal</button>
-            </div>
-        </form>
-      </div>
-    </div>
-</div>
+        </div>
 </main>
 @endsection

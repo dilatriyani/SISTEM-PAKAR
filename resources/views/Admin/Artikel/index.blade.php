@@ -34,21 +34,23 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->judul }}</td>
-                                <td>{{ $item->isi }}</td>
+                                <td>{!! $item->isi !!}</td>
                                 <td><img src="{{ asset('storage/' . $item->image) }}" alt="image" width="60"></td>
-                                <td class="row">
-                                    <div class="col-md-4 text-end">
+                                <td >
+                                    <div class="row">
+                                    {{-- <div class="col-md-4 text-end">
                                         <button onclick="editartikel({{ $item->id }})" class="btn btn-primary"
                                             data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
                                             class="btn btn-primary fw-bold rounded-pill px-4 shadow float-end">
                                             <i class='bx bx-edit'></i>
                                         </button>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-md-4 text-start">
                                         <a href="{{ url('Artikel-hapus', $item->id) }}" class="btn btn-danger"><i
                                                 class="bx bxs-trash" style=color:white></i></a>
                                     </div>
+                                </div>
                                 </td>
                             </tr>
                         @endforeach

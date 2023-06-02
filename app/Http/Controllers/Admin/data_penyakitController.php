@@ -12,7 +12,8 @@ class data_penyakitController extends Controller
     {
         $data = [
             "data_penyakit" => data_penyakit::all(),
-            "data_gejala" => gejala::all()
+            "data_gejala" => gejala::all(),
+    
         ];
 
         return view('Admin.Data_Penyakit.index', $data);
@@ -24,7 +25,6 @@ class data_penyakitController extends Controller
         data_penyakit::create([
             'kd_penyakit' => $request->kd_penyakit,
             'nama_penyakit' => $request->nama_penyakit,
-            'deskripsi' => $request->deskripsi,
             'solusi' => $request->solusi,
         ]);
         return redirect()->back()->with('success', 'Data penyakit berhasil ditambahkan!');
@@ -43,7 +43,6 @@ class data_penyakitController extends Controller
         data_penyakit::where("id", $request->id)->update([
             'kd_penyakit' => $request->kd_penyakit,
             'nama_penyakit' => $request->nama_penyakit,
-            'deskripsi' => $request->deskripsi,
             'solusi' => $request->solusi,
         ]);
 

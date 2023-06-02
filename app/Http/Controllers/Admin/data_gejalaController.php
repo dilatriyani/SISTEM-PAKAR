@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\gejala;
+// use App\Models\Rule;
 use App\Models\data_penyakit;
 class data_gejalaController extends Controller
 {
@@ -12,7 +13,8 @@ class data_gejalaController extends Controller
     {
         $data = [
             "data_gejala" => gejala::get(),
-            "data_penyakit" => data_penyakit::all()
+            "data_penyakit" => data_penyakit::all(),
+            // "rule" => Rule::all(),
         ];
 
         return view('Admin.Data_Gejala.index', $data);
@@ -38,7 +40,8 @@ class data_gejalaController extends Controller
     public function edit(Request $request)
     {
         $data = [
-            "edit" => gejala::where("id", $request->id)->first()
+            "edit" => gejala::where("id", $request->id)->first(),
+            "data_penyakit" => data_penyakit::all(),
         ];
 
         return view('Admin.Data_Gejala.edit', $data);

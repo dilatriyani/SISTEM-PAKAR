@@ -15,13 +15,6 @@
     @enderror
 </div>
 
-<div class="form-group">
-    <label>Deskripsi</label>
-    <input type="text" name="deskripsi" id="ubah" class="form-control @error('deskripsi') is-invalid @enderror" value="{{ $edit->deskripsi }}" required>
-    @error('deskripsi')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-</div>
 
 <div class="form-group">
     <label>Solusi</label>

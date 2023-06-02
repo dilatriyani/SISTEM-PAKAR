@@ -9,7 +9,7 @@
   <nav id="navbar" class="navbar">
     <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="">Diagnosa</a></li>
+      <li><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Konsultasi</a></li>
       <li><a href="/Pengguna/Layouts/tentang">Tentang</a></li>
       <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
         <ul>
@@ -26,7 +26,7 @@
           </li> --}}
         </ul>
       </li>
-      <li><a href="">Login</a></li>
+      <li><a href="/login">Login Admin</a></li>
     </ul>
   </nav><!-- .navbar -->
 

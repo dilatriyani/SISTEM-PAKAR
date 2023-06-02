@@ -2,6 +2,7 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
+      @if (Auth::user()->role == 'admin'|| Auth::user()->role == 'pakar')
       <li class="nav-item">
         <a class="nav-link " href="/Admin/Dashboard">
           <i class="bi bi-grid"></i>
@@ -9,17 +10,19 @@
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="/Profile">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
-      </li><!-- End Profile Page Nav -->
-
+      </li>
+      <!-- End Profile Page Nav -->
+      @if(Auth::user()->role !== 'pakar')
       <li class="nav-item">
         <a class="nav-link collapsed" href="/Admin/Data_Admin">
           <i class="bi bi-menu-button-wide"></i><span>Data Admin</span>
         </a>
-      </li><!-- End Components Nav -->
+      </li>
+      @endif<!-- End Components Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="/Admin/Data_Diagnosa">
           <i class="bi bi-menu-button-wide"></i><span>Data Diagnosa</span>
@@ -29,48 +32,16 @@
         <a class="nav-link collapsed" href="/Admin/Data_Penyakit">
           <i class="bi bi-journal-text"></i><span>Data Penyakit</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        {{-- <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Form Elements</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Form Layouts</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Form Editors</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>Form Validation</span>
-            </a>
-          </li>
-        </ul> --}}
+       
       </li><!-- End Forms Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed"  href="/Admin/Data_Gejala">
           <i class="bi bi-layout-text-window-reverse"></i><span>Data Gejala</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        {{-- <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>General Tables</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Data Tables</span>
-            </a>
-          </li>
-        </ul> --}}
       </li><!-- End Tables Nav -->
-
+      @endif
+      @if(Auth::user()->role !== 'pakar')
       <li class="nav-item">
         <a class="nav-link collapsed"  href="/Admin/Rule">
           <i class="bi bi-bar-chart"></i><span>Rule</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -81,42 +52,16 @@
         <a class="nav-link collapsed" href="/Admin/Artikel">
           <i class="bi bi-gem"></i><span> Data Artikels</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-      </li><!-- End Icons Nav -->
+      </li>
+      @endif
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
-          <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
-        </a>
-      </li><!-- End F.A.Q Page Nav -->
-
-      {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li><!-- End Contact Page Nav --> --}}
-
-      {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
-          <i class="bi bi-card-list"></i>
-          <span>Register</span>
-        </a>
-      </li><!-- End Register Page Nav --> --}}
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" href="/logout">
           <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
+          <span>Logout</span>
         </a>
       </li><!-- End Login Page Nav -->
-
-      {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
-          <i class="bi bi-file-earmark"></i>
-          <span>Blank</span>
-        </a>
-      </li><!-- End Blank Page Nav --> --}}
-
+     
+     
     </ul>
 
   </aside><!-- End Sidebar-->

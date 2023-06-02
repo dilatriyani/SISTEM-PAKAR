@@ -26,7 +26,6 @@
                             <th scope="col">ID</th>
                             <th scope="col">Kode</th>
                             <th scope="col">Nama Penyakit</th>
-                            <th scope="col">Deskripsi</th>
                             <th scope="col">Solusi</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -37,7 +36,6 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->kd_penyakit }}</td>
                                 <td>{{ $item->nama_penyakit }}</td>
-                                <td>{!! $item->deskripsi !!}</td>
                                 <td>{!! $item->solusi !!}</td>
                                 <td style="size: 30px;" class="row">
                                     <div class="col-md-4 text-end">
@@ -102,10 +100,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group mb-1">
-                                <label for="deskripsi">Deskripsi</label>
-                                <textarea name="deskripsi" id="deskripsi" cols="30" rows="10"></textarea>
-                            </div>
+                           
                             <div class="form-group mb-1">
                                 <label for="solusi">Solusi</label>
                                 <textarea name="solusi" id="solusi" cols="30" rows="10"></textarea>

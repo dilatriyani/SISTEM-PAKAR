@@ -13,7 +13,6 @@ class gejala extends Model
 
     protected $guarded = [' '];
 
-
     public function data_penyakit()
     {
         return $this->belongsTo("App\Models\data_penyakit", "kd_penyakit", "id");

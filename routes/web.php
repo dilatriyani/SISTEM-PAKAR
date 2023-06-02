@@ -8,7 +8,10 @@ use App\Http\Controllers\Admin\data_gejalaController;
 use App\Http\Controllers\Admin\data_penyakitController;
 use App\Http\Controllers\Admin\data_diagnosaController;
 use App\Http\Controllers\Admin\RuleController;
+use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ArtikelController;
+use App\Http\Controllers\ArtikelDetailController;
+use App\Http\Controllers\Admin\ProfileController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -23,15 +26,21 @@ use App\Http\Controllers\Admin\ArtikelController;
 
 Route::get('/', function () {
     return view('Pengguna.Layouts.Home');
-});
+}); 
 
 Route::get('/Admin/Dashboard', [dashboardController::class, 'index']);
 Route::get('/Pengguna/Diagnosa', [dashboardController::class, 'diagnosa']);
-Route::get('/Pengguna/Layouts', [dashboardController::class, 'info_penyakit']);
 Route::get('/Pengguna/Layouts/tentang', [dashboardController::class, 'tentang']);
+Route::get('/Pengguna/Diagnosa/Hasil', [dashboardController::class, 'hasil']);
 
+
+Route::get('/Pengguna/Layouts', [dashboardController::class, 'info_penyakit']);
+Route::get('/Pengguna/Layouts/detail/{id}', [ArtikelDetailController::class, 'index']);
 //crud data_admin
-Route::get('/Admin/Data_Admin', [data_adminController::class, 'index']);
+// Route::get("/Admin/Data_Admin/edit", [data_adminController::class, "edit"]);
+// Route::get("/Admin/Data_Admin/simpan", [data_adminController::class, "update"]);
+Route::resource("/Admin/Data_Admin", data_adminController::class);
+Route::get("/Data_Admin/{id}", [data_adminController::class, "destroy"]);
 
 //crud data gejala
 // Route::get('/Admin/Data_Gejala', [data_gejalaController::class, 'index']);
@@ -53,10 +62,47 @@ Route::get('/Admin/Data_Diagnosa', [data_diagnosaController::class, 'index']);
 
 
 // crud rules
-Route::get('/Admin/Rule', [RuleController::class, 'index']);
+// Route::get('/Admin/Rule', [RuleController::class, 'index']);
+Route::resource("/Admin/Rule", RuleController::class);
+Route::get("/Rule/edit", [RuleController::class, "edit"]);
+Route::put("/Rule/simpan", [RuleController::class, "update"]);
 
 // crud rules
 Route::resource("/Admin/Artikel", ArtikelController::class);
 Route::get("/Artikel/edit", [ArtikelController::class, "edit"]);
 Route::put("/Artikel/simpan", [ArtikelController::class, "update"]);
 Route::get("/Artikel-hapus/{id}", [ArtikelController::class, "destroy"]);
+
+//login
+// Route::get("/login", LoginController::class, 'index');
+// Route::post("/login", LoginController::class, 'login');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login',  [LoginController::class, 'index'])->name('login');
+    Route::post('/login',  [LoginController::class, 'login']);  
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    
+    Route::get('/Admin/Dashboard',  [dashboardController::class, 'index']);
+    Route::get('/logout', [LoginController::class, 'logout']);  
+});
+
+Route::controller(ProfileController::class)->group(function(){
+    Route::get('/Profile','index');
+    Route::patch('/Profile{id}','update')->name('update');
+});
+// require __DIR__.'/auth.php';
+// Route::resource("/login", LoginController::class);
+
+// Route::get('Admin/Rule/index', [RuleController::class, 'index'])->name('Admin.Rule.index');
+// Route::get('Admin/Rule/create', [RuleController::class, 'create'])->name('Admin.Rule.index');
+// Route::post('Admin/Rule/store', [RuleController::class, 'store'])->name('Admin.Rule.index');
+
+// Route::get('/Admin/Rule', [RuleController::class, 'index']);
+
+// Route::get('/Admin/Rule', [RuleController::class, 'index'])->name('admin.rule.index');
+// Route::resource("/Admin/TambahRule", RuleController::class);
+// Route::post('/Admin/Rule', [RuleController::class, 'store'])->name('admin.rule.store');
+// Route::get('/Admin/Rule', [RuleController::class, 'index'])->name('rules');
+// Route::post('/Admin/TambahRule', [RuleController::class, 'store']);

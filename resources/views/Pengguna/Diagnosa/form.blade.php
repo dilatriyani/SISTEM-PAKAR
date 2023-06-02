@@ -1,97 +1,65 @@
 @extends('Pengguna.Partials.index')
 @section('container')
+    <section id="faq" class="faq">
+        <div class="container" data-aos="fade-up">
+            <div class="row gy-4 ">
+                <div class="col-lg-4">
+                    <div class="content px-xl-5">
+                        <h5>Jawablah <strong>Pertanyaan</strong> disamping</h5>
+                        <p>
+                        <div class="card " style="width: 18rem; hight: 30rem; ">
+                            <div class="card-body">
+                                <h5 class="card-header mb-3">Data diri</h5>
 
-<body>
-    <div class="container p-5">
-      <div class="card p-4">
-        <div class="card-header p-3">
-            <div class=" row">
-              <label for="staticEmail" class="col-sm-2 col-form-label">Nama </label>
-              <div class="col-sm-8">
-                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value=": HIKUN">
-              </div>
+                                <div class="row">
+                                    <div class="col-md-4">Nama :
+                                    </div>
+                                    <div class="col-md-8"> Hikun
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">Umur :
+                                    </div>
+                                    <div class="col-md-8"> 20
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-4"> Alamat :
+                                    </div>
+                                    <div class="col-md-8"> Lohbener
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+
+                    <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+                        <div
+                            class="col-lg-12 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
+                            <div class="card text-center shadow p-3 mb-5 bg-body rounded ">
+
+                                <div class="card-body">
+                                    <h3 class=" m-3 p-3">Apakah anda merasakan sakit pada bagian tengkuk leher ?</h3>
+
+                                    <a href="/Pengguna/Diagnosa/Hasil" class="btn btn-secondary  col-md-2 mb-2">Ya</a> <a href="/Pengguna/Diagnosa/Hasil"
+                                        class="btn btn-secondary col-md-2 mb-2">Tidak</a>
+                                </div>
+                            </div>
+                          </div>
+                    </div><!-- # Faq item-->
+                </div>
             </div>
-            <div class=" row">
-              <label for="staticEmail" class="col-sm-2 col-form-label">Usia </label>
-              <div class="col-sm-8">
-                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value=": 25 thn">
-              </div>
-            </div>
+
         </div>
-            <div class=" card-body mb-2">
-                <div class="col-sm-10 MT-2 mb-4">
-                  <h3>Pilih gejala yang dirasakan</h3>
-                </div>
-    
-              <div class="mb-1 row" style="font-family: inherit">
-                <div class="col-sm-9 mt-2">
-                  <div>Apakah anda mengalami sakit kepala?</div>
-                </div>
-                <div class="col-sm-1">
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      Ya
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-1">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                     Tidak
-                    </label>
-                  </div>
-                </div>
-              </div>
 
-              <div class="mb-1 row" >
-                <div class="col-sm-9 mt-2">
-                  <div>Apakah Anda mengalami sakit leher hingga tengkuk?</div>
-                </div>
-                <div class="col-sm-1">
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      Ya
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-1">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                     Tidak
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mb-1 row" >
-                <div class="col-sm-9 mt-2">
-                  <div>Apakah anda mengalami mual?</div>
-                </div>
-                <div class="col-sm-1">
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      Ya
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-1">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                     Tidak
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-      </div>
-    </div>
-    </div>
-</body>
+        </div>
+    </section><!-- End Frequently Asked Questions Section -->
 @endsection
-    
