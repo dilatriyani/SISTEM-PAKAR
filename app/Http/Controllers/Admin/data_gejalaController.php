@@ -47,15 +47,15 @@ class data_gejalaController extends Controller
         return view('Admin.Data_Gejala.edit', $data);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        gejala::where("id", $request->id)->update([
-            'nama_gejala' => $request->nama_gejala,
-            'kd_gejala' => $request->kd_gejala,
-            'penyakit_id' => $request->penyakit_id,
-        ]);
+        $data_gejala = gejala::findOrFail($id);
+        $data_gejala->kd_gejala = $request->kd_gejala;
+        $data_gejala->nama_gejala = $request->nama_gejala;
+        $data_gejala->save();
+    
 
-        return back()->with('success', 'Data Penyakit berhasil diupdate');
+        return redirect()->back()->with('success', 'Data Penyakit berhasil diupdate');
     }
 
     public function destroy($id)

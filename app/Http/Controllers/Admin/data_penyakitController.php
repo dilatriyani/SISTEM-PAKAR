@@ -18,17 +18,38 @@ class data_penyakitController extends Controller
 
         return view('Admin.Data_Penyakit.index', $data);
     }
+   
 
-    public function store(Request $request)
+    public function store(request $request)
     {
 
-        data_penyakit::create([
-            'kd_penyakit' => $request->kd_penyakit,
-            'nama_penyakit' => $request->nama_penyakit,
-            'solusi' => $request->solusi,
-        ]);
+        $this->validate($request, [
+             
+              'kd_penyakit'   => 'required',
+              'nama_penyakit' => 'required',
+              'solusi'        => 'required',
+ 		  ]);
+        //upload image
+       
+        $data                = new data_penyakit;
+        $data->kd_penyakit   = $request->kd_penyakit;
+        $data->nama_penyakit = $request->nama_penyakit;
+        $data->solusi        = $request->solusi;
+        $data->save();
+
         return redirect()->back()->with('success', 'Data penyakit berhasil ditambahkan!');
+
     }
+    // public function store(Request $request)
+    // {
+
+    //     data_penyakit::create([
+    //         'kd_penyakit' => $request->kd_penyakit,
+    //         'nama_penyakit' => $request->nama_penyakit,
+    //         'solusi' => $request->solusi,
+    //     ]);
+    //     return redirect()->back()->with('success', 'Data penyakit berhasil ditambahkan!');
+    // }
     public function edit(Request $request)
     {
         $dp = [
@@ -38,16 +59,29 @@ class data_penyakitController extends Controller
         return view('Admin.Data_Penyakit.edit', $dp);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        data_penyakit::where("id", $request->id)->update([
-            'kd_penyakit' => $request->kd_penyakit,
-            'nama_penyakit' => $request->nama_penyakit,
-            'solusi' => $request->solusi,
-        ]);
-
-        return back()->with('success', 'Data Penyakit berhasil diupdate');
+        $data_penyakit = data_penyakit::findOrFail($id);
+        $data_penyakit->kd_penyakit = $request->kd_penyakit;
+        $data_penyakit->nama_penyakit = $request->nama_penyakit;
+        $data_penyakit->solusi = $request->solusi;
+        $data_penyakit->save();
+    
+        return redirect()->back()->with('success', 'Data penyakit berhasil diubah!');
     }
+    
+    // public function update(Request $request)
+    // {
+    //     // dd($request->all());
+    //     data_penyakit::where("id", $request->id)->update([
+    //         'kd_penyakit' => $request->kd_penyakit,
+    //         'nama_penyakit' => $request->nama_penyakit,
+    //         'solusi' => $request->solusi,
+    //     ]);
+
+    //     return back()->with('success', 'Data penyakit berhasil diubah!');
+
+    // }
 
     // public function show(Request $request)
     // {

@@ -13,11 +13,12 @@
                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalTambah"> + Tambah</button>
             </div>
 
-            @if (session('berhasil'))
-                <div class="alert alert-success">
-                    {{ session('berhasil') }}
-                </div>
-            @endif
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        
 
             <div class="card p-3">
                 <table class="table table-hover">
@@ -26,7 +27,6 @@
                             <th scope="col">ID</th>
                             <th scope="col">Gejala</th>
                             <th scope="col">Kode Gejala</th>
-                            <th scope="col">Kode penyakit</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -34,16 +34,14 @@
                         @foreach ($data_gejala as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{!! $item->nama_gejala !!}</td>
+                                <td>{{ $item->nama_gejala }}</td>
                                 <td>{{ $item->kd_gejala }}</td>
-                                <td>{{ $item->data_penyakit->kd_penyakit }}</td>
                                 <td style="size: 30px;" class="row">
                                     <div class="col-md-4 text-end">
-                                        <button onclick="editgejala({{ $item->id }})" class="btn btn-primary"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
-                                            class="btn btn-primary fw-bold rounded-pill px-4 shadow float-end">
-                                            <i class='bx bx-edit'></i>
-                                        </button>
+                                        <a href="#exampleModalEdit{{ $item->id }}" data-bs-toggle="modal"
+                                            class="btn btn-primary fw-bold rounded-pill px-4 shadow float-end"><i
+                                                class='bx bx-edit'></i></a>
+ 
                                     </div>
 
                                     <div class="col-md-4 text-start">
@@ -68,6 +66,7 @@
 
             </div>
         </div>
+        @include('Admin.Data_Gejala.edit')
 
 
         {{-- modal tambah data gejala --}}
@@ -86,7 +85,7 @@
                         <div class="modal-body">
                             <div class="form-group mb-1">
                                 <label for="nama_gejala">Tambahkan Gejala</label>
-                                <textarea type="text" class="form-control" name="nama_gejala" id="nama_gelaja" placeholder="""
+                                <textarea type="text" class="form-control" name="nama_gejala"  placeholder=""
                                     @error('nama_gejala') is-invalid @enderror value="{{ old('nama_gejala') }}"></textarea>
                                 @error('nama_gejala')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -103,19 +102,12 @@
                             </div>
 
                         </div>
-                        <div class="form-group mb-1">
-                            <select class="form-control select2" aria-label="Default select example" name="kd_penyakit"
-                                id="kd_penyakit">
-                                <option selected>Pilih kode penyakit</option>
-                                @foreach ($data_penyakit as $item)
-                                    <option value="{{ $item->id }}">{{ $item->kd_penyakit }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-
+                        
                         <div class="modal-footer d-md-block">
-                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light"
+                            onclick="disable1(this);">
+                            <span id="buttonText">Simpan</span>
+                        </button> 
                             <button type="button" class="btn btn-danger btn-sm">Batal</button>
                         </div>
                     </form>
@@ -123,54 +115,25 @@
             </div>
         </div>
 
-        {{-- modal edit  --}}
-        <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="width: 50%">
-                <div class="modal-content">
-                    <div class="modal-header hader">
-                        <h3 class="modal-title" id="exampleModalLabel">
-                            Edit Data Gejala
-                        </h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ url('/Data_Gejala/simpan') }}" method="POST" enctype="multipart/form-data">
-                        @method('PUT')
-                        {{ csrf_field() }}
-                        <div class="modal-body" id="modal-content-edit">
-                        </div>
-                        <div class="modal-footer d-md-block">
-                            <button type="submit" class="btn btn-success btn-sm">Simpan</button>
-                            <button type="button" class="btn btn-danger btn-sm">Batal</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            function editgejala(id) {
-                $.ajax({
-                    url: "{{ url('/Data_Gejala/edit') }}",
-                    type: "GET",
-                    data: {
-                        id: id
-                    },
-                    success: function(data) {
-                        $("#modal-content-edit").html(data);
-                        return true;
-                    }
-                });
-            }
-        </script>
-
-        <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+        {{-- <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 
         <script>
             CKEDITOR.replace('nama_gejala');
         </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        --}}
+
+       <script>
+        function disable1(button) {
+            button.disabled = true;
+            var buttonText = document.getElementById("buttonText");
+            buttonText.textContent = "Tunggu...";
+    
+            setTimeout(function() {
+                button.form.submit();
+            }, 500);
+        }
+    </script>
+
     </main>
 @endsection
  

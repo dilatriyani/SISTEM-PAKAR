@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->id();
-            $table->string('kd_penyakit');
-            $table->string('kd_gejala');
-            $table->string('pertanyaan');
+            // $table->string('kd_penyakit');
+            // $table->string('kd_gejala');
+
+            $table->foreignId('id_penyakit')->constrained('data_penyakits')->onDelete('cascade');
+            $table->string('daftar_gejala');
             $table->timestamps();
         });
     }

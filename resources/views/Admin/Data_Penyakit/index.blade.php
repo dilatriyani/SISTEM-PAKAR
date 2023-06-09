@@ -13,11 +13,12 @@
                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalTambah"> + Tambah</button>
             </div>
 
-            @if (session('berhasil'))
-                <div class="alert alert-success">
-                    {{ session('berhasil') }}
-                </div>
-            @endif
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        
 
             <div class="card p-3">
                 <table class="table table-hover">
@@ -39,11 +40,10 @@
                                 <td>{!! $item->solusi !!}</td>
                                 <td style="size: 30px;" class="row">
                                     <div class="col-md-4 text-end">
-                                        <button onclick="editpenyakit({{ $item->id }})" class="btn btn-primary"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
-                                            class="btn btn-primary fw-bold rounded-pill px-4 shadow float-end">
-                                            <i class='bx bx-edit'></i>
-                                        </button>
+                                        <a href="#exampleModalEdit{{ $item->id }}" data-bs-toggle="modal"
+                                            class="btn btn-primary fw-bold rounded-pill px-4 shadow float-end"><i
+                                                class='bx bx-edit'></i></a>
+
                                     </div>
 
                                     <div class="col-md-4 text-start">
@@ -64,9 +64,10 @@
                         @endforeach
                     </tbody>
                 </table>
-
             </div>
         </div>
+        @include('Admin.Data_Penyakit.edit')
+
 
         {{-- modal tambah data_penyakit --}}
         <div class="modal fade" id="exampleModalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -100,7 +101,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                           
+
                             <div class="form-group mb-1">
                                 <label for="solusi">Solusi</label>
                                 <textarea name="solusi" id="solusi" cols="30" rows="10"></textarea>
@@ -108,7 +109,12 @@
                             </div>
                         </div>
                         <div class="modal-footer d-md-block">
-                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light"
+                            onclick="disable1(this);">
+                            <span id="buttonText">Simpan</span>
+                        </button> 
+                            
+                            {{-- <button type="submit" class="btn btn-primary btn-sm">Simpan</button> --}}
                             <button type="button" class="btn btn-danger btn-sm">Batal</button>
                         </div>
                     </form>
@@ -117,31 +123,7 @@
         </div>
         {{-- end --}}
 
-        <!-- Modal Edit -->
-        <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="width: 80%">
-                <div class="modal-content" style="width: 80%">
-                    <div class="modal-header hader">
-                        <h3 class="modal-title" id="exampleModalLabel">
-                            Edit Data Penyakit
-                        </h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ url('/Admin/Data_Penyakit/simpan') }}" method="POST"
-                        enctype="multipart/form-data">
-                        @method('PUT')
-                        {{ csrf_field() }}
-                        <div class="modal-body" id="modal-content-edit">
-                        </div>
-                        <div class="modal-footer d-md-block">
-                            <button type="submit" class="btn btn-success btn-sm">Simpan</button>
-                            <button type="button" class="btn btn-danger btn-sm">Batal</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- END -->
+
         <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
         <script>
             $(function() {
@@ -154,7 +136,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </main>
 @endsection
+ 
+<script>
+    function disable1(button) {
+        button.disabled = true;
+        var buttonText = document.getElementById("buttonText");
+        buttonText.textContent = "Tunggu...";
 
+        setTimeout(function() {
+            button.form.submit();
+        }, 500);
+    }
+</script>
+
+{{-- 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -171,4 +166,4 @@
             }
         });
     }
-</script>
+</script> --}}

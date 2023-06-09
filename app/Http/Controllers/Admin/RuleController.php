@@ -15,9 +15,11 @@ class RuleController extends Controller
     {
        
         $data = [
-            "rules" => Rule::all(),
-            "data_penyakits" => data_penyakit::all(),
-            "gejalas" => gejala::all()
+            "rules" => Rule::with(['data_penyakit', 'gejala'])
+                        ->orderBy('id', 'asc')
+                        ->paginate(5),
+            "data_penyakits" => data_penyakit::get(),
+            "gejalas" => gejala::get()
     
         ];
 
@@ -27,43 +29,82 @@ class RuleController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'kd_penyakit' => 'required',
-        'kd_gejala' => 'required',
-        'pertanyaan' => 'required',
+        'id_penyakit' => 'required',
+        'daftar_gejala' => 'required|array',
     ]);
-    Rule::create([
-        
-        'kd_penyakit' => $request->kd_penyakit,
-        'kd_gejala' => $request->kd_gejala,
-        'pertanyaan' => $request->pertanyaan,
-    ]);
+
+    $data_rule = new Rule;
+    $data_rule->id_penyakit = $request->input('id_penyakit');
+    $data_rule->daftar_gejala = implode(',', $request->input('daftar_gejala'));
+
+    // // Mendapatkan objek penyakit berdasarkan kode penyakit yang dipilih
+    // $penyakit = data_penyakit::findOrFail($request->input('kd_penyakit'));
+    // $data_rule->nama_penyakit = $penyakit->nama;
+
+    $data_rule->save();
+
     return redirect()->back()->with('success', 'Data rule berhasil ditambahkan!');
 }
-
-    
-public function edit(Request $request)
+public function edit($id)
 {
+    $data_rule = Rule::findOrFail($id);
+    $data_penyakit = data_penyakit::get();
+    $gejala = gejala::get();
+
+    $selectedGejala = explode(',', $data_rule->daftar_gejala);
+
     $data = [
-        "edit" => Rule::where("id", $request->id)->first(),
-        "data_penyakits" => data_penyakit::all(),
-        "gejalas" => gejala::all()
+        "item" => $data_rule,
+        "data_penyakits" => $data_penyakit,
+        "gejalas" => $gejala,
+        "selectedGejala" => $selectedGejala
     ];
 
     return view('Admin.Rule.edit', $data);
 }
 
-public function update(Request $request)
-{
-    Rule::where("id", $request->id)->update([
+
+
+// public function update(Request $request, $id)
+// {
+//     $request->validate([
+//         'id_penyakit' => 'required',
+//         'daftar_gejala'=>'required|array',
+
+//     ]);
+
+//     $data_rule = Rule::findOrFail($id);
+//     $data_rule->id_penyakit = $request->input('id_penyakit');
+//     $data_rule->daftar_gejala = implode(',', $request->input('daftar_gejala'));
+//     $data_rule->save();
     
-        'kd_penyakit' => $request->kd_penyakit,
-        'kd_gejala' => $request->kd_gejala,
-        'pertanyaan' => $request->pertanyaan,
 
+//     return back()->with('success', 'Data Rule berhasil diupdate');
+// }
 
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'id_penyakit' => 'required',
+        'daftar_gejala' => 'required|array',
     ]);
 
+    $data_rule = Rule::findOrFail($id);
+    $data_rule->id_penyakit = $request->input('id_penyakit');
+    $data_rule->daftar_gejala = implode(',', $request->input('daftar_gejala'));
+    $data_rule->save();
+
     return back()->with('success', 'Data Rule berhasil diupdate');
+}
+
+
+public function destroy(string $id){
+
+    $data_rule= Rule::findOrFail($id);
+
+    $data_rule->delete();
+
+    return back()->with('success', 'Data Berhasil diHapus');
 }
 
     }

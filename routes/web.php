@@ -45,17 +45,18 @@ Route::get("/Data_Admin/{id}", [data_adminController::class, "destroy"]);
 //crud data gejala
 // Route::get('/Admin/Data_Gejala', [data_gejalaController::class, 'index']);
 Route::resource("/Admin/Data_Gejala", data_gejalaController::class);
-Route::get("/Data_Gejala/edit", [data_gejalaController::class, "edit"]);
-Route::get("/Data_Gejala/simpan", [data_gejalaController::class, "update"]);
-Route::get("/Gejala/{id}", [data_gejalaController::class, "destroy"]);
+// Route::get("/Data_Gejala/edit", [data_gejalaController::class, "edit"]);
+// Route::get("/Data_Gejala/simpan", [data_gejalaController::class, "update"]);
+// Route::get("/Gejala/{id}", [data_gejalaController::class, "destroy"]);
 
 
 //crud data penyakit
 // Route::get('/Admin/Data_Penyakit', [data_penyakitController::class, 'index']);
-Route::get("/Admin/Data_Penyakit/edit", [data_penyakitController::class, "edit"]);
-Route::get("/Admin/Data_Penyakit/simpan", [data_penyakitController::class, "update"]);
+// Route::get("/Admin/Data_Penyakit/edit", [data_penyakitController::class, "edit"]);
+// Route::get("/Admin/Data_Penyakit/simpan", [data_penyakitController::class, "update"]);
+// Route::get("/Admin/Data_Penyakit", [data_penyakitController::class, "create"]);
 Route::resource("/Admin/Data_Penyakit", data_penyakitController::class);
-Route::get("/Penyakit/{id}", [data_penyakitController::class, "destroy"]);
+// Route::get("/Penyakit/{id}", [data_penyakitController::class, "destroy"]);
 
 //crud data diagnosa
 Route::get('/Admin/Data_Diagnosa', [data_diagnosaController::class, 'index']);
@@ -64,8 +65,6 @@ Route::get('/Admin/Data_Diagnosa', [data_diagnosaController::class, 'index']);
 // crud rules
 // Route::get('/Admin/Rule', [RuleController::class, 'index']);
 Route::resource("/Admin/Rule", RuleController::class);
-Route::get("/Rule/edit", [RuleController::class, "edit"]);
-Route::put("/Rule/simpan", [RuleController::class, "update"]);
 
 // crud rules
 Route::resource("/Admin/Artikel", ArtikelController::class);

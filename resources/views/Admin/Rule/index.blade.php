@@ -14,7 +14,6 @@
                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalTambah"> + Tambah</button>
             </div>
 
-
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -27,7 +26,6 @@
                         <th>No.</th>
                         <th>Kode Penyakit</th>
                         <th>Kode Gejala</th>
-                        <th>Pertanyaan</th>
                         <!-- Tambahkan kolom untuk field lainnya sesuai kebutuhan -->
                         <th>Aksi</th>
                     </tr>
@@ -36,148 +34,139 @@
                     @foreach ($rules as $rule)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $rule->data_penyakit->kd_penyakit }}</td>
-                            <td>{{ $rule->gejala->kd_gejala }}</td>
-                            <td>{{ $rule->pertanyaan }}</td>
-                            <!-- Tambahkan kolom untuk field lainnya sesuai kebutuhan -->
+                            <td>{{ $rule->data_penyakit->nama_penyakit }}</td>
                             <td>
-                                <td style="size: 30px;" class="row">
-                                    <div class="col-md-4 text-end">
-                                        <button onclick="editrule({{ $rule->id }})" class="btn btn-primary"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
-                                            class="btn btn-primary fw-bold rounded-pill px-4 shadow float-end">
-                                            <i class='bx bx-edit'></i>
-                                        </button>
+                                @php
+                                    $gejalaIds = explode(',', $rule->daftar_gejala);
+                                    $gejalaItems = [];
+                                    foreach ($gejalas as $gejalaItem) {
+                                        if (in_array($gejalaItem->id, $gejalaIds)) {
+                                            $gejalaItems[] = $gejalaItem;
+                                        }
+                                    }
+                                @endphp
+
+                                @foreach ($gejalaItems as $gejalaItem)
+                                    {{ $gejalaItem->kd_gejala }}
+                                @endforeach
+                            </td>
+                            <td>
+                                <div style="size: 30px;" class="row">
+                                    <div class="col-md-4 text-start">
+                                        <a href="#exampleModalEdit{{ $rule->id }}" data-bs-toggle="modal"
+                                            class="btn btn-primary fw-bold rounded-pill px-4 shadow float-end"><i
+                                                class='bx bx-edit'></i></a>
                                     </div>
 
                                     <div class="col-md-4 text-start">
-                                        {{-- <form onsubmit="return confirm('Apakah anda yakin ?');"
-                                            action="{{ route('Data_Gejala.destroy', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger" type="submit">
-                                                <a href="/Gejala/{{ $item->id }}" method="post"
-                                                    onsubmit="return confirm('Apakah anda yakin ?');"><i
-                                                        class="bx bxs-trash" style=color:white></i>
-                                                </a>
-                                            </button>
-                                        </form> --}}
                                     </div>
-                                </td>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+        @include('Admin.Rule.edit')
 
         {{-- modal tambah data gejala --}}
         <div class="modal fade" id="exampleModalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" style="width: 125%">
-            <div class="modal-content p-3" style="width: 125%">
-                <div class="modal-header hader">
-                    <h3 class="modal-title" id="exampleModalLabel">
-                        Tambah Data Gejala
-                    </h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            aria-hidden="true">
+            <div class="modal-dialog" style="width: 125%">
+                <div class="modal-content p-3" style="width: 125%">
+                    <div class="modal-header hader">
+                        <h3 class="modal-title" id="exampleModalLabel">
+                            Tambah Data Gejala
+                        </h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ url('Admin/Rule') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+
+                            <div class="form-group mb-1">
+                                <label for="kode_penyakit" class="form-label mb-2">Pilih Kode Penyakit</label>
+                                <select class="form-select mb-3" aria-label="Kode Penyakit" name="id_penyakit"
+                                    id="kode_penyakit" onchange="updateNamaPenyakit(this)">
+                                    <option value="">Pilih kode penyakit</option>
+                                    @foreach ($data_penyakits as $item)
+                                        <option value="{{ $item->id }}" data-nama="{{ $item->nama_penyakit }}">
+                                            {{ $item->kd_penyakit }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-1">
+                                <label for="nama_penyakit" class="mb-2">Nama Penyakit</label>
+                                <input type="text" id="nama_penyakit" name="nama_penyakit" class="form-control" readonly>
+                            </div>
+                            <div>
+                                <script>
+                                    function updateNamaPenyakit(select) {
+                                        var selectedOption = select.options[select.selectedIndex];
+                                        var namaPenyakitInput = document.getElementById('nama_penyakit');
+                                        namaPenyakitInput.value = selectedOption.getAttribute('data-nama');
+                                    }
+                                </script>
+                            </div>
+
+                            <div class="form mb-1">
+                                <label for="daftar_gejala">Pilih Kode Gejala</label>
+                                @foreach ($gejalas as $item)
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="daftar_gejala[]"
+                                            value="{{ $item->id }}" id="gejala_{{ $item->id }}">
+                                        <label for="gejala_{{ $item->id }}" class="form-check-label">
+                                            {{ $item->nama_gejala }} [ {{ $item->kd_gejala }} ]
+                                        </label>
+                                    </div>
+                                @endforeach
+
+                            </div>
+                            <div class="modal-footer d-md-block">
+                                <div class="modal-footer d-md-block">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light"
+                                        onclick="disable1(this);">
+                                        <span id="buttonText">Simpan</span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm">Batal</button>
+                                </div>
+                    </form>
                 </div>
-                <form action="{{ url('Admin/Rule') }}" method="POST" >
-                    @csrf
-                    <div class="modal-body">
-
-                      
-
-        
-                    <div class="form-group mb-1">
-                        <label for="pertanyaan " class="mb-2">Pilih Kode Gejala</label>
-                        <select class="form-control select2 mb-3" aria-label="Default select example" name="kd_penyakit"
-                            id="kd_penyakit">
-                            <option selected>Pilih kode penyakit</option>
-                            @foreach ($data_penyakits as $item)
-                                <option value="{{ $item->id }}">{{ $item->kd_penyakit }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group mb-1">
-                        <label for="pertanyaan" class="mb-2">Pilih Kode Gejala</label>
-                        <select class="form-control select2 mb-2" aria-label="Default select example" name="kd_gejala"
-                            id="kd_gejala">
-                            <option selected>Pilih kode gejala</option>
-                            @foreach ($gejalas as $item)
-                                <option value="{{ $item->id }}">{{ $item->kd_gejala }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group mb-1">
-                    <label for="pertanyaan">Pertanyaan</label>
-                    <textarea type="text" class="form-control" name="pertanyaan" id="tambah" placeholder=""
-                        @error('pertanyaan') is-invalid @enderror value="{{ old('pertanyaan') }}"></textarea>
-                    @error('pertanyaan')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                    <div class="modal-footer d-md-block">
-                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                        <button type="button" class="btn btn-danger btn-sm">Batal</button>
-                    </div>
-                </form>
             </div>
-        </div>
-        </div>
-    </div>
-    
-
-    {{-- modal edit --}}
-    <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" style="width: 50%">
-            <div class="modal-content">
-                <div class="modal-header hader">
-                    <h3 class="modal-title" id="exampleModalLabel">
-                        Edit Data Gejala
-                    </h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ url('/Rule/simpan') }}" method="POST" enctype="multipart/form-data">
-                    @method('PUT')
-                    {{ csrf_field() }}
-                    <div class="modal-body" id="modal-content-edit">
-                    </div>
-                    <div class="modal-footer d-md-block">
-                        <button type="submit" class="btn btn-success btn-sm">Simpan</button>
-                        <button type="button" class="btn btn-danger btn-sm">Batal</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
 
-    {{-- js ajax --}}
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-<script type="text/javascript">
-    function editrule(id) {
-        $.ajax({
-            url: "{{ url('/Rule/edit') }}",
-            type: "GET",
-            data: {
-                id: id
-            },
-            success: function(data) {
-                $("#modal-content-edit").html(data);
-                return true;
-            }
-        });
-    }
-</script>
 
-<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var kodePenyakit = document.getElementById('kode_penyakit');
+                    var namaPenyakit = document.getElementById('nama_penyakit');
+                    var penyakitData = {
+                        !!json_encode($data_penyakits) !!
+                    };
 
-<script>
-    CKEDITOR.replace('tambah');
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    kodePenyakit.addEventListener('change', function() {
+                        var selectedId = kodePenyakit.value;
+                        var selectedPenyakit = penyakitData.find(function(penyakit) {
+                            return penyakit.id == selectedId;
+                        });
+
+                        namaPenyakit.value = selectedPenyakit ? selectedPenyakit.nama_penyakit : '';
+                    });
+                });
+            </script>
+
+            <script>
+                function disable1(button) {
+                    button.disabled = true;
+                    var buttonText = document.getElementById("buttonText");
+                    buttonText.textContent = "Tunggu...";
+
+                    setTimeout(function() {
+                        button.form.submit();
+                    }, 500);
+                }
+            </script>
+
     </main>
 @endsection

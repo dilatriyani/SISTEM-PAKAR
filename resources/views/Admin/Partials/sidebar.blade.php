@@ -10,8 +10,8 @@
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/Profile">
-          <i class="bi bi-person"></i>
+        <a class="nav-link " href="/Profile">
+          <i class="bi bi-grid"></i>
           <span>Profile</span>
         </a>
       </li>

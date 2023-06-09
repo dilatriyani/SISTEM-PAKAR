@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->longText('nama_gejala');
             $table->string('kd_gejala');
-            $table->foreignId('kd_penyakit');
             $table->timestamps();
         });
     }
