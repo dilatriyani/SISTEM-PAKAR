@@ -11,7 +11,7 @@ class data_penyakitController extends Controller
     public function index()
     {
         $data = [
-            "data_penyakit" => data_penyakit::all(),
+            "data_penyakit" => data_penyakit::paginate(5),
             "data_gejala" => gejala::all(),
     
         ];

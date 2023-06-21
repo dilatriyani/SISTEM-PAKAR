@@ -9,12 +9,6 @@
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-      <li class="nav-item">
-        <a class="nav-link " href="/Profile">
-          <i class="bi bi-grid"></i>
-          <span>Profile</span>
-        </a>
-      </li>
       <!-- End Profile Page Nav -->
       @if(Auth::user()->role !== 'pakar')
       <li class="nav-item">
@@ -22,6 +16,14 @@
           <i class="bi bi-menu-button-wide"></i><span>Data Admin</span>
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link " href="/Profile">
+          <i class="bi bi-person"></i>
+          <span>Profile</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
       @endif<!-- End Components Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="/Admin/Data_Diagnosa">
@@ -44,7 +46,7 @@
       @if(Auth::user()->role !== 'pakar')
       <li class="nav-item">
         <a class="nav-link collapsed"  href="/Admin/Rule">
-          <i class="bi bi-bar-chart"></i><span>Rule</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-bar-chart"></i><span>Basis Pengetahuan</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
       </li><!-- End Charts Nav -->
 

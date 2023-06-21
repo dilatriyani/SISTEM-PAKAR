@@ -31,9 +31,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($user as $item)
+        @foreach ($user as $index => $item)
         <tr>
-            <td>{{ $loop->iteration }}</td>
+            <td scope="row">{{ $index + $user->firstitem() }}</td>
             <td>{{ $item->name }}</td> 
             <td>{{ $item->email }}</td>
             <td>{{ $item->role }}</td>
@@ -58,7 +58,7 @@
         @endforeach
     </tbody>
     </table>
-      
+      {{ $user->links() }}
    </div>
 </div>
 
@@ -121,7 +121,7 @@
                         </div>
                         <div class="modal-footer d-md-block">
                             <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                            <button type="button" class="btn btn-danger btn-sm">Batal</button>
+                           
                         </div>
                     </form>
                 </div>

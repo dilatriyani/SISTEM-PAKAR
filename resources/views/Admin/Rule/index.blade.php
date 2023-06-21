@@ -31,9 +31,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($rules as $rule)
+                    @foreach ($rules as $index => $rule)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td scope="row">{{ $index + $rules->firstitem() }}</td>
                             <td>{{ $rule->data_penyakit->nama_penyakit }}</td>
                             <td>
                                 @php
@@ -52,13 +52,23 @@
                             </td>
                             <td>
                                 <div style="size: 30px;" class="row">
-                                    <div class="col-md-4 text-start">
+                                    <div class="col-md-3 text-start">
                                         <a href="#exampleModalEdit{{ $rule->id }}" data-bs-toggle="modal"
-                                            class="btn btn-primary fw-bold rounded-pill px-4 shadow float-end"><i
+                                            class="btn btn-primary fw-bold rounded-pill px-3 shadow float-end"><i
                                                 class='bx bx-edit'></i></a>
                                     </div>
-
-                                    <div class="col-md-4 text-start">
+                                    <div class="col-md-3 text-start">
+                                        <form onsubmit="return confirm('Apakah anda yakin ?');"
+                                            action="{{ route('Rule.destroy', $rule->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger fw-bold rounded-pill px-3 shadow float-end" type="submit">
+                                                <a href="/Penyakit/{{ $rule->id }}" method="post"
+                                                    onsubmit="return confirm('Apakah anda yakin ?');"><i
+                                                        class="bx bxs-trash" style=color:white></i>
+                                                </a>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </td>
@@ -66,6 +76,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $rules->links() }}
         </div>
         @include('Admin.Rule.edit')
 
@@ -129,7 +140,6 @@
                                         onclick="disable1(this);">
                                         <span id="buttonText">Simpan</span>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-sm">Batal</button>
                                 </div>
                     </form>
                 </div>

@@ -11,7 +11,7 @@ class data_adminController extends Controller
     public function index()
     {
         $data = [
-            "user" => User::all(),
+            "user" => User::paginate(4),
             
         ];
 
@@ -30,6 +30,29 @@ class data_adminController extends Controller
         ]);
         return redirect()->back()->with('success', 'Data Admin berhasil ditambahkan!');
     }
+
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('Admin.Data_Admin.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+        ]);
+
+        return redirect('/Admin/Data_Admin')->with('success', 'Data Admin berhasil diperbarui!');
+    }
+
 
     public function destroy($id)
     {

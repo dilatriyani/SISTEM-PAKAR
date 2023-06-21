@@ -32,9 +32,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data_penyakit as $item)
+                        @foreach ($data_penyakit as $index => $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td scope="row">{{ $index + $data_penyakit->firstitem() }}</td>
                                 <td>{{ $item->kd_penyakit }}</td>
                                 <td>{{ $item->nama_penyakit }}</td>
                                 <td>{!! $item->solusi !!}</td>
@@ -64,6 +64,8 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                {{ $data_penyakit->links() }}
             </div>
         </div>
         @include('Admin.Data_Penyakit.edit')
@@ -113,9 +115,7 @@
                             onclick="disable1(this);">
                             <span id="buttonText">Simpan</span>
                         </button> 
-                            
-                            {{-- <button type="submit" class="btn btn-primary btn-sm">Simpan</button> --}}
-                            <button type="button" class="btn btn-danger btn-sm">Batal</button>
+                           
                         </div>
                     </form>
                 </div>

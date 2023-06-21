@@ -12,7 +12,7 @@ class ProfileController extends Controller
     {
         $user = User::findOrFail(Auth::id());
 
-        return view("admin.pengaturan.Profile", compact('user'));
+        return view("Admin.Profile.profile", compact('user'));
     }
 
     public function update(Request $request, $id)
@@ -20,7 +20,6 @@ class ProfileController extends Controller
         request()->validate([
             'name'       => 'required|string|min:2|max:100',
             'email'      => 'required|email|unique:users,email, ' . $id . ',id',
-            
             
         ]);
 

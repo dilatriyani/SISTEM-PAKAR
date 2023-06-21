@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->foreignId('id_penyakit')->constrained('data_penyakits')->onDelete('cascade');
             $table->string('daftar_gejala');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

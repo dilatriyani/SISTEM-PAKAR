@@ -12,7 +12,7 @@ class data_gejalaController extends Controller
     public function index()
     {
         $data = [
-            "data_gejala" => gejala::get(),
+            "data_gejala" => gejala::paginate(5),
             "data_penyakit" => data_penyakit::all(),
             // "rule" => Rule::all(),
         ];

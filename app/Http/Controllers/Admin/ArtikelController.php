@@ -13,7 +13,7 @@ class ArtikelController extends Controller
     public function index()
     {
         $data = [
-            "artikel" => Artikel::all()
+            "artikel" => Artikel::paginate(5)
         ];
 
         return view('Admin.Artikel.index', $data);
@@ -48,32 +48,58 @@ class ArtikelController extends Controller
         return view("Admin.Artikel.edit", $data);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
+        $data = $request->validate([
+            'judul' => 'required',
+            'isi' => 'required',
+            'image_new' => 'nullable|image|mimes:jpg,jpeg,png'
+        ]);
+    
+        $artikel = Artikel::findOrFail($id);
+    
+        if ($request->hasFile("image_new")) {
+            if ($artikel->image) {
+                Storage::delete($artikel->image);
+            }
+    
+            $data['image'] = $request->file("image_new")->store("Artikel");
+        } else {
+            // If no new image is uploaded, retain the existing image
+            $data['image'] = $artikel->image;
+        }
+    
+        $artikel->update($data);
+    
+        return back()->with('success', 'Artikel berhasil diperbarui!');
+    }
+    
+    
+
         // $this->validate($request, [
         //     'judul' => '',
         //     'deskripsi' => '',
         //     'image' => 'mimes:jpg,jpeg,png'
         // ]);
 
-        if($request->file("image_new")) {
-            if ($request->gambarLama) {
-                Storage::delete($request->gambarLama);
-            }
+        // if($request->file("image_new")) {
+        //     if ($request->gambarLama) {
+        //         Storage::delete($request->gambarLama);
+        //     }
 
-            $data = $request->file("image_new")->store("Artikel");
-        }else {
-            $data = $request->gambarLama;
-        }
+        //     $data = $request->file("image_new")->store("Artikel");
+        // }else {
+        //     $data = $request->gambarLama;
+        // }
 
-        Artikel::where("id", $request->id)->update([
-            'judul' => $request->judul,
-            'isi' => $request->isi,
-            'image' => $data
-        ]);
+        // Artikel::where("id", $request->id)->update([
+        //     'judul' => $request->judul,
+        //     'isi' => $request->isi,
+        //     'image' => $data
+        // ]);
 
-        return back();
-    }
+        // return back();
+    // }
 
     
     public function destroy($id)

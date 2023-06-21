@@ -1,30 +1,56 @@
-<input type="hidden" name="id" value="{{ $edit->id }}">
-<input type="hidden" name="gambarLama" value="{{ $edit->image }}">
-<div class="form-group">
-    <label>Judul</label>
-    <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" value="{{ old('judul') }}{{ $edit->judul }}">
-    @error('judul')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-</div>
+@foreach ($artikel as $item)
+<div class="modal fade" id="exampleModalEdit{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $item->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 80%">
+        <div class="modal-content" style="width: 80%">
+            <div class="modal-header hader">
+                <h3 class="modal-title" id="exampleModalLabel{{ $item->id }}">
+                    Edit Data Penyakit
+                </h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ url('/Admin/Artikel', $item->id) }}" method="POST" enctype="multipart/form-data">
+                @method('PUT')
+                @csrf
+                <div class="modal-body" id="modal-content-edit">
+                    <div class="form-group">
+                        <label>Judul</label>
+                        <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" value="{{ $item->judul }}" required>
+                        @error('judul')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-<div class="form-group">
-    <label>Isi</label>
-    <textarea name="isi" class="form-control @error('isi') is-invalid @enderror"
-    value="{{ old('isi') }}" id="edit" >{{ $edit->isi }}
-    </textarea>
-    @error('isi')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
+                    <div class="form-group">
+                        <label>Isi</label>
+                        <textarea name="isi" class="form-control @error('isi') is-invalid @enderror" required>{!! $item->isi !!} </textarea>
+                        @error('isi')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-1">
+                        <label for="image">Gambar</label>
+                        @if (isset($item->image))
+                            <div>
+                                <img src="{{ asset('storage/' . $item->image) }}" alt="Gambar" style="max-width: 200px; margin-bottom: 10px;">
+                            </div>
+                        @endif
+                        <input type="file" class="form-control" name="image_new" id="image">
+                        @error('image_new')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                </div>
+                <div class="modal-footer d-md-block">
+                    <button type="submit" class="btn btn-success btn-sm">Simpan</button>
+                 
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-<div class="form-group">
-    <label for="image_new"> Gambar </label>
-    <br><br>
-    <img src="{{ url('/storage/' .$edit->image)}}" style="width: 20%;"><br><br>
-    <input type="file" class="form-control  " name="image_new" id="image_new">
-</div>
+@endforeach
 
 <script>
-    CKEDITOR.replace('edit');
+    CKEDITOR.replace('isi');
 </script>
-<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>

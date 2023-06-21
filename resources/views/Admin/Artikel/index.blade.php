@@ -30,24 +30,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($artikel as $item)
+                        @foreach ($artikel as $index => $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td scope="row">{{ $index + $artikel->firstitem() }}</td>
                                 <td>{{ $item->judul }}</td>
                                 <td>{!! $item->isi !!}</td>
                                 <td><img src="{{ asset('storage/' . $item->image) }}" alt="image" width="60"></td>
                                 <td >
                                     <div class="row">
-                                    {{-- <div class="col-md-4 text-end">
-                                        <button onclick="editartikel({{ $item->id }})" class="btn btn-primary"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
-                                            class="btn btn-primary fw-bold rounded-pill px-4 shadow float-end">
-                                            <i class='bx bx-edit'></i>
-                                        </button>
-                                    </div> --}}
+                                        <div class="col-md-4 text-end">
+                                            <a href="#exampleModalEdit{{ $item->id }}" data-bs-toggle="modal"
+                                                class="btn btn-primary fw-bold rounded-pill px-3 shadow float-end"><i
+                                                    class='bx bx-edit'></i></a>
+    
+                                        </div>
 
                                     <div class="col-md-4 text-start">
-                                        <a href="{{ url('Artikel-hapus', $item->id) }}" class="btn btn-danger"><i
+                                        <a href="{{ url('Artikel-hapus', $item->id) }}" class="btn btn-danger fw-bold rounded-pill px-3 shadow"><i
                                                 class="bx bxs-trash" style=color:white></i></a>
                                     </div>
                                 </div>
@@ -57,9 +56,11 @@
 
                     </tbody>
                 </table>
-
+{{ $artikel->links() }}
             </div>
         </div>
+
+        @include('Admin.Artikel.edit')
 
         {{-- modal tambah data gejala --}}
         <div class="modal fade" id="exampleModalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -106,36 +107,17 @@
                             @enderror
                         </div>
                         <div class="modal-footer d-md-block">
-                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                            <button type="button" class="btn btn-danger btn-sm">Batal</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light"
+                            onclick="disable1(this);">
+                            <span id="buttonText">Simpan</span>
+                        </button> 
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="width: 50%">
-                <div class="modal-content">
-                    <div class="modal-header hader">
-                        <h3 class="modal-title" id="exampleModalLabel">
-                            Edit Data Gejala
-                        </h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ url('/Artikel/simpan') }}" method="POST" enctype="multipart/form-data">
-                        @method('PUT')
-                        {{ csrf_field() }}
-                        <div class="modal-body" id="modal-content-edit">
-                        </div>
-                        <div class="modal-footer d-md-block">
-                            <button type="submit" class="btn btn-success btn-sm">Simpan</button>
-                            <button type="button" class="btn btn-danger btn-sm">Batal</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+       
 
         <script src="https://code.jquery.com/jquery-3.6.1.min.js"
             integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
@@ -154,7 +136,17 @@
                 });
             }
         </script>
+<script>
+    function disable1(button) {
+        button.disabled = true;
+        var buttonText = document.getElementById("buttonText");
+        buttonText.textContent = "Tunggu...";
 
+        setTimeout(function() {
+            button.form.submit();
+        }, 500);
+    }
+</script>
 <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('isi');

@@ -30,6 +30,23 @@ a:hover {
   text-decoration: none;
 }
 
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input[type="password"] {
+            padding-right: 25px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 5px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
 h1,
 h2,
 h3,

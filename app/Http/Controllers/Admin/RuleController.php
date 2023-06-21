@@ -46,7 +46,8 @@ class RuleController extends Controller
     return redirect()->back()->with('success', 'Data rule berhasil ditambahkan!');
 }
 public function edit($id)
-{
+{ 
+    
     $data_rule = Rule::findOrFail($id);
     $data_penyakit = data_penyakit::get();
     $gejala = gejala::get();
@@ -98,13 +99,14 @@ public function update(Request $request, $id)
 }
 
 
-public function destroy(string $id){
-
-    $data_rule= Rule::findOrFail($id);
-
+public function destroy($id)
+{
+    //delete post
+    $data_rule = Rule::findOrFail($id);
     $data_rule->delete();
 
-    return back()->with('success', 'Data Berhasil diHapus');
+    //redirect to index
+    return redirect('/Admin/Rule')->with(['success' => 'Data Berhasil Dihapus!']);
 }
 
     }

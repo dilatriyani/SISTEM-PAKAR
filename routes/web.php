@@ -68,8 +68,6 @@ Route::resource("/Admin/Rule", RuleController::class);
 
 // crud rules
 Route::resource("/Admin/Artikel", ArtikelController::class);
-Route::get("/Artikel/edit", [ArtikelController::class, "edit"]);
-Route::put("/Artikel/simpan", [ArtikelController::class, "update"]);
 Route::get("/Artikel-hapus/{id}", [ArtikelController::class, "destroy"]);
 
 //login
@@ -91,6 +89,7 @@ Route::controller(ProfileController::class)->group(function(){
     Route::get('/Profile','index');
     Route::patch('/Profile{id}','update')->name('update');
 });
+// Route::resource("/Profile", ProfileController::class);
 // require __DIR__.'/auth.php';
 // Route::resource("/login", LoginController::class);
 

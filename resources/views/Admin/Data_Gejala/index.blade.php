@@ -31,9 +31,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data_gejala as $item)
+                        @foreach ($data_gejala as $index => $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td scope="row">{{ $index + $data_gejala->firstitem() }}</td>
                                 <td>{{ $item->nama_gejala }}</td>
                                 <td>{{ $item->kd_gejala }}</td>
                                 <td style="size: 30px;" class="row">
@@ -63,7 +63,7 @@
 
                     </tbody>
                 </table>
-
+                {{ $data_gejala->links() }}
             </div>
         </div>
         @include('Admin.Data_Gejala.edit')
@@ -108,7 +108,7 @@
                             onclick="disable1(this);">
                             <span id="buttonText">Simpan</span>
                         </button> 
-                            <button type="button" class="btn btn-danger btn-sm">Batal</button>
+                         
                         </div>
                     </form>
                 </div>
