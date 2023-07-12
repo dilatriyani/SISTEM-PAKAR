@@ -65,8 +65,18 @@
                                 </p>
             
                             </div>
+                            {{-- <div class="mt-3 mb-5 col-md-6">
+                                <a href="{{ route('printPdf') }}" class="btn btn-info">
+                                    <i class="bi bi-printer p-1"></i>Cetak Hasil
+                                </a>
+                            </div>
+                             --}}
                             <div class="mt-3 mb-5 col-md-6"><button type="button" class="btn btn-info"><i class="bi bi-printer p-1"></i>Cetak Hasil</button></div>
                            
+                            {{-- <div class="mt-3 mb-5 col-md-6 btn btn-info">
+                                <a href="{{ route('print', ['id' => $id]) }}" target="_blank">Cetak</a>
+                            </div> --}}
+
                         </div>
                        
                     </div>

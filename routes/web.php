@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\ArtikelDetailController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\PrintController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,10 @@ Route::controller(ProfileController::class)->group(function(){
     Route::get('/Profile','index');
     Route::patch('/Profile{id}','update')->name('update');
 });
+
+
+
+
 // Route::resource("/Profile", ProfileController::class);
 // require __DIR__.'/auth.php';
 // Route::resource("/login", LoginController::class);
