@@ -18,7 +18,7 @@
                 {{ session('success') }}
             </div>
         @endif
-        
+
 
             <div class="card p-3">
                 <table class="table table-hover">
@@ -78,7 +78,7 @@
                 <div class="modal-content p-3" style="width: 125%">
                     <div class="modal-header hader">
                         <h3 class="modal-title" id="exampleModalLabel">
-                            Tambah Data Gejala
+                            Tambah Data Penyakit
                         </h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -114,8 +114,8 @@
                             <button type="submit" class="btn btn-primary waves-effect waves-light"
                             onclick="disable1(this);">
                             <span id="buttonText">Simpan</span>
-                        </button> 
-                           
+                        </button>
+
                         </div>
                     </form>
                 </div>
@@ -136,7 +136,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </main>
 @endsection
- 
+
 <script>
     function disable1(button) {
         button.disabled = true;
@@ -149,7 +149,7 @@
     }
 </script>
 
-{{-- 
+{{--
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script type="text/javascript">

@@ -14,10 +14,10 @@
         <div class="col-lg-4 col-md-6">
           <div class="service-item  position-relative">
             <div class="">
-              <img src="{{ asset('storage/'.$artikel['image']) }}" alt="image" width="50px">
+              <img src="{{ asset('storage/'.$artikel['image']) }}" alt="image" class="card-img-top" width="100%"">
             </div><br>
             <h3>{{ $artikel['judul'] }}</h3>
-            <a href="/Pengguna/Layouts/detail/{{ $artikel['id'] }}" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+            <a href="/Pengguna/Layouts/detail/{{ $artikel['id'] }}" class="readmore stretched-link">Lihat Lebih Detail <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
         <!-- End Service Item -->

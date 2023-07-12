@@ -26,12 +26,16 @@ use App\Http\Controllers\Admin\ProfileController;
 
 Route::get('/', function () {
     return view('Pengguna.Layouts.Home');
-}); 
+});
 
 Route::get('/Admin/Dashboard', [dashboardController::class, 'index']);
-Route::get('/Pengguna/Diagnosa', [dashboardController::class, 'diagnosa']);
+// Route::get('/Pengguna/Diagnosa', [dashboardController::class, 'diagnosa']);
+Route::post('/Pengguna/Diagnosa/Mulai', [dashboardController::class, 'getUserSess']);
+Route::get('/Pengguna/Diagnosa/{id}', [dashboardController::class, 'question']);
+Route::post('/Pengguna/Diagnosa/Hasil', [dashboardController::class, 'result']);
+
 Route::get('/Pengguna/Layouts/tentang', [dashboardController::class, 'tentang']);
-Route::get('/Pengguna/Diagnosa/Hasil', [dashboardController::class, 'hasil']);
+// Route::get('/Pengguna/Diagnosa/Hasil', [dashboardController::class, 'hasil']);
 
 
 Route::get('/Pengguna/Layouts', [dashboardController::class, 'info_penyakit']);
@@ -43,7 +47,7 @@ Route::resource("/Admin/Data_Admin", data_adminController::class);
 Route::get("/Data_Admin/{id}", [data_adminController::class, "destroy"]);
 
 //crud data gejala
-// Route::get('/Admin/Data_Gejala', [data_gejalaController::class, 'index']);
+Route::get('/Admin/Data_Gejala', [data_gejalaController::class, 'store']);
 Route::resource("/Admin/Data_Gejala", data_gejalaController::class);
 // Route::get("/Data_Gejala/edit", [data_gejalaController::class, "edit"]);
 // Route::get("/Data_Gejala/simpan", [data_gejalaController::class, "update"]);
@@ -51,7 +55,7 @@ Route::resource("/Admin/Data_Gejala", data_gejalaController::class);
 
 
 //crud data penyakit
-// Route::get('/Admin/Data_Penyakit', [data_penyakitController::class, 'index']);
+Route::get('/Admin/Data_Penyakit', [data_penyakitController::class, 'store']);
 // Route::get("/Admin/Data_Penyakit/edit", [data_penyakitController::class, "edit"]);
 // Route::get("/Admin/Data_Penyakit/simpan", [data_penyakitController::class, "update"]);
 // Route::get("/Admin/Data_Penyakit", [data_penyakitController::class, "create"]);
@@ -75,14 +79,14 @@ Route::get("/Artikel-hapus/{id}", [ArtikelController::class, "destroy"]);
 // Route::post("/login", LoginController::class, 'login');
 Route::middleware(['guest'])->group(function () {
     Route::get('/login',  [LoginController::class, 'index'])->name('login');
-    Route::post('/login',  [LoginController::class, 'login']);  
+    Route::post('/login',  [LoginController::class, 'login']);
 });
 
 
 Route::middleware(['auth'])->group(function () {
-    
+
     Route::get('/Admin/Dashboard',  [dashboardController::class, 'index']);
-    Route::get('/logout', [LoginController::class, 'logout']);  
+    Route::get('/logout', [LoginController::class, 'logout']);
 });
 
 Route::controller(ProfileController::class)->group(function(){

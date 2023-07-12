@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class gejala extends Model
+class Gejala extends Model
 {
     use HasFactory;
-    
+
     protected $table = "gejalas";
 
     protected $guarded = [' '];
 
-  
+
 }

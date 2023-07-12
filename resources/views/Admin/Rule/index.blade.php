@@ -19,64 +19,69 @@
                     {{ session('success') }}
                 </div>
             @endif
+            <div class="card p-3">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Kode Penyakit</th>
+                                <th>Kode Gejala</th>
+                                <!-- Tambahkan kolom untuk field lainnya sesuai kebutuhan -->
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($rules as $index => $rule)
+                                <tr>
+                                    <td scope="row">{{ $index + $rules->firstitem() }}</td>
+                                    <td>{{ $rule->data_penyakit->nama_penyakit }}</td>
+                                    <td>
+                                        @php
+                                            $gejalaIds = explode(',', $rule->daftar_gejala);
+                                            $gejalaItems = [];
+                                            foreach ($gejalas as $gejalaItem) {
+                                                if (in_array($gejalaItem->id, $gejalaIds)) {
+                                                    $gejalaItems[] = $gejalaItem;
+                                                }
+                                            }
+                                        @endphp
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Kode Penyakit</th>
-                        <th>Kode Gejala</th>
-                        <!-- Tambahkan kolom untuk field lainnya sesuai kebutuhan -->
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($rules as $index => $rule)
-                        <tr>
-                            <td scope="row">{{ $index + $rules->firstitem() }}</td>
-                            <td>{{ $rule->data_penyakit->nama_penyakit }}</td>
-                            <td>
-                                @php
-                                    $gejalaIds = explode(',', $rule->daftar_gejala);
-                                    $gejalaItems = [];
-                                    foreach ($gejalas as $gejalaItem) {
-                                        if (in_array($gejalaItem->id, $gejalaIds)) {
-                                            $gejalaItems[] = $gejalaItem;
-                                        }
-                                    }
-                                @endphp
-
-                                @foreach ($gejalaItems as $gejalaItem)
-                                    {{ $gejalaItem->kd_gejala }}
-                                @endforeach
-                            </td>
-                            <td>
-                                <div style="size: 30px;" class="row">
-                                    <div class="col-md-3 text-start">
-                                        <a href="#exampleModalEdit{{ $rule->id }}" data-bs-toggle="modal"
-                                            class="btn btn-primary fw-bold rounded-pill px-3 shadow float-end"><i
-                                                class='bx bx-edit'></i></a>
-                                    </div>
-                                    <div class="col-md-3 text-start">
-                                        <form onsubmit="return confirm('Apakah anda yakin ?');"
-                                            action="{{ route('Rule.destroy', $rule->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger fw-bold rounded-pill px-3 shadow float-end" type="submit">
-                                                <a href="/Penyakit/{{ $rule->id }}" method="post"
-                                                    onsubmit="return confirm('Apakah anda yakin ?');"><i
-                                                        class="bx bxs-trash" style=color:white></i>
-                                                </a>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            {{ $rules->links() }}
+                                        @foreach ($gejalaItems as $gejalaItem)
+                                            {{ $gejalaItem->kd_gejala }}
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        <div style="size: 30px;" class="row">
+                                            <div class="col-md-3 text-start">
+                                                <a href="#exampleModalEdit{{ $rule->id }}" data-bs-toggle="modal"
+                                                    class="btn btn-primary fw-bold rounded-pill px-3 shadow float-end"><i
+                                                        class='bx bx-edit'></i></a>
+                                            </div>
+                                            <div class="col-md-3 text-start">
+                                                <form onsubmit="return confirm('Apakah anda yakin ?');"
+                                                    action="{{ route('Rule.destroy', $rule->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button
+                                                        class="btn btn-danger fw-bold rounded-pill px-3 shadow float-end"
+                                                        type="submit">
+                                                        <a href="/Penyakit/{{ $rule->id }}" method="post"
+                                                            onsubmit="return confirm('Apakah anda yakin ?');"><i
+                                                                class="bx bxs-trash" style=color:white></i>
+                                                        </a>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{ $rules->links() }}
+                </div>
+            </div>
         </div>
         @include('Admin.Rule.edit')
 

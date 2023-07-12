@@ -21,6 +21,7 @@
         
 
             <div class="card p-3">
+                <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -49,7 +50,7 @@
                                             action="{{ route('Data_Gejala.destroy', $item->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger" type="submit">
+                                            <button class="btn btn-danger  fw-bold rounded-pill px-4 shadow float-end" type="submit">
                                                 <a href="/Gejala/{{ $item->id }}" method="post"
                                                     onsubmit="return confirm('Apakah anda yakin ?');"><i
                                                         class="bx bxs-trash" style=color:white></i>
@@ -64,6 +65,7 @@
                     </tbody>
                 </table>
                 {{ $data_gejala->links() }}
+            </div>
             </div>
         </div>
         @include('Admin.Data_Gejala.edit')

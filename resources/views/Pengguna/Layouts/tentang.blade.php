@@ -4,46 +4,52 @@
     <body>
         <section id="about" class="about">
             <div class="container" data-aos="fade-up">
-      
-              <div class="section-header">
-                <h2>Tentang Aplikasi</h2>
-                <p>Aperiam dolorum et et wuia molestias qui eveniet numquam nihil porro incidunt dolores placeat sunt id nobis omnis tiledo stran delop</p>
-              </div>
-      
-              <div class="row gy-4">
-                <div class="col-lg-6">
-                  <h3>Voluptatem dignissimos provident quasi corporis</h3>
-                  <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="">
-                  <p>Ut fugiat ut sunt quia veniam. Voluptate perferendis perspiciatis quod nisi et. Placeat debitis quia recusandae odit et consequatur voluptatem. Dignissimos pariatur consectetur fugiat voluptas ea.</p>
-                  <p>Temporibus nihil enim deserunt sed ea. Provident sit expedita aut cupiditate nihil vitae quo officia vel. Blanditiis eligendi possimus et in cum. Quidem eos ut sint rem veniam qui. Ut ut repellendus nobis tempore doloribus debitis explicabo similique sit. Accusantium sed ut omnis beatae neque deleniti repellendus.</p>
+
+                <div class="section-header">
+                    <h2>Tentang Aplikasi</h2>
+                    <p>EXSISC aplikasi sistem pakar identifikasi dini faktor resiko penyakit kolestrol </p>
                 </div>
-                <div class="col-lg-6">
-                  <div class="content ps-0 ps-lg-5">
-                    <p class="fst-italic">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                      magna aliqua.
-                    </p>
-                    <ul>
-                      <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                      <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                      <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                    </ul>
-                    <p>
-                      Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-                    </p>
-      
-                    <div class="position-relative mt-4">
-                      <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt="">
-                      <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
+
+                <div class="row gy-4">
+                    <div class="col-lg-6">
+                        <h3>Apa itu EXSISC?</h3>
+
+                        <p>EXSISC, singkatan dari Expert System Kolesterol, adalah sebuah aplikasi yang dirancang sebagai
+                            sistem pakar untuk identifikasi dini faktor risiko penyakit terkait kolesterol. Aplikasi ini
+                            bertujuan untuk membantu pengguna dalam memahami dan mengenali faktor-faktor yang dapat
+                            meningkatkan risiko terkena penyakit terkait kolesterol, sehingga pengguna dapat mengambil
+                            langkah-langkah pencegahan yang tepat</p>
+                        <p>Aplikasi EXSISC menggunakan pendekatan sistem pakar, yang menggabungkan pengetahuan dan
+                            pengalaman dari para ahli dalam bidang kesehatan untuk memberikan penilaian risiko yang akurat
+                            kepada pengguna. Sistem pakar ini didasarkan pada aturan-aturan yang telah ditentukan
+                            sebelumnya, yang memungkinkan aplikasi untuk menganalisis gejala, riwayat kesehatan, dan
+                            faktor-faktor risiko individu yang berkontribusi terhadap penyakit kolesterol.</p>
                     </div>
-                  </div>
+                    <div class="col-lg-6">
+                        <div class="content ps-0 ps-lg-5">
+                            <p class="fst-italic">
+                                Keunggulan EXSISC sebagai aplikasi sistem pakar adalah kemampuannya untuk memberikan
+                                penilaian risiko yang personal dan spesifik berdasarkan karakteristik individu pengguna.
+                                Dengan demikian, pengguna dapat lebih memahami faktor-faktor risiko yang mempengaruhi
+                                kondisi kesehatan mereka dan mengambil langkah-langkah yang tepat untuk mencegah penyakit
+                                terkait kolesterol.
+                            </p>
+
+                            <p>
+                                Namun, penting untuk diingat bahwa EXSISC bukan pengganti dari konsultasi langsung dengan
+                                tenaga medis profesional. Aplikasi ini hanya berfungsi sebagai alat bantu yang memberikan
+                                informasi awal dan rekomendasi umum. Jika pengguna memiliki kekhawatiran atau gejala yang
+                                mengkhawatirkan, disarankan untuk berkonsultasi dengan dokter atau tenaga medis yang
+                                berkualifikasi untuk evaluasi lebih lanjut dan penanganan yang sesuai.
+                            </p>
+
+                           
+                        </div>
+                    </div>
                 </div>
-              </div>
-      
+
             </div>
-          </section><!-- End About Us Section -->
-      
+        </section><!-- End About Us Section -->
+
     </body>
 @endsection
-

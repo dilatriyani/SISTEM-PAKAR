@@ -13,43 +13,44 @@ class data_penyakitController extends Controller
         $data = [
             "data_penyakit" => data_penyakit::paginate(5),
             "data_gejala" => gejala::all(),
-    
+
         ];
 
         return view('Admin.Data_Penyakit.index', $data);
     }
-   
 
-    public function store(request $request)
-    {
 
-        $this->validate($request, [
-             
-              'kd_penyakit'   => 'required',
-              'nama_penyakit' => 'required',
-              'solusi'        => 'required',
- 		  ]);
-        //upload image
-       
-        $data                = new data_penyakit;
-        $data->kd_penyakit   = $request->kd_penyakit;
-        $data->nama_penyakit = $request->nama_penyakit;
-        $data->solusi        = $request->solusi;
-        $data->save();
-
-        return redirect()->back()->with('success', 'Data penyakit berhasil ditambahkan!');
-
-    }
-    // public function store(Request $request)
+    // public function store(request $request)
     // {
 
-    //     data_penyakit::create([
-    //         'kd_penyakit' => $request->kd_penyakit,
-    //         'nama_penyakit' => $request->nama_penyakit,
-    //         'solusi' => $request->solusi,
-    //     ]);
+    //     $this->validate($request, [
+
+    //           'kd_penyakit'   => 'required',
+    //           'nama_penyakit' => 'required',
+    //           'solusi'        => 'required',
+ 	// 	  ]);
+    //     //upload image
+
+    //     $data                = new data_penyakit;
+    //     $data->kd_penyakit   = $request->kd_penyakit;
+    //     $data->nama_penyakit = $request->nama_penyakit;
+    //     $data->solusi        = $request->solusi;
+    //     $data->save();
+
     //     return redirect()->back()->with('success', 'Data penyakit berhasil ditambahkan!');
+
     // }
+    public function store(Request $request)
+    {
+
+        data_penyakit::create([
+            'kd_penyakit' => $request->kd_penyakit,
+            'nama_penyakit' => $request->nama_penyakit,
+            'solusi' => $request->solusi,
+        ]);
+        return redirect()->back()->with('success', 'Data penyakit berhasil ditambahkan!');
+    }
+    
     public function edit(Request $request)
     {
         $dp = [
@@ -66,10 +67,10 @@ class data_penyakitController extends Controller
         $data_penyakit->nama_penyakit = $request->nama_penyakit;
         $data_penyakit->solusi = $request->solusi;
         $data_penyakit->save();
-    
+
         return redirect()->back()->with('success', 'Data penyakit berhasil diubah!');
     }
-    
+
     // public function update(Request $request)
     // {
     //     // dd($request->all());
@@ -92,7 +93,7 @@ class data_penyakitController extends Controller
     //     return view('superadmin.master.ketentuan.detail', $ket);
     // }
 
-    // 
+    //
     public function destroy($id)
     {
         //delete post

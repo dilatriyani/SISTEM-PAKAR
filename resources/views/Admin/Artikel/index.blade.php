@@ -14,47 +14,38 @@
                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalTambah"> + Tambah</button>
             </div>
 
+
+            
             <div class="card p-3">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <thead>
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Judul</th>
-                                    <th scope="col">Isi</th>
-                                    <th scope="col">Gambar</th>
-                                    <th scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($artikel as $index => $item)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td scope="row">{{ $index + $artikel->firstitem() }}</td>
-                                <td>{{ $item->judul }}</td>
-                                <td>{!! $item->isi !!}</td>
-                                <td><img src="{{ asset('storage/' . $item->image) }}" alt="image" width="60"></td>
-                                <td >
-                                    <div class="row">
-                                        <div class="col-md-4 text-end">
-                                            <a href="#exampleModalEdit{{ $item->id }}" data-bs-toggle="modal"
-                                                class="btn btn-primary fw-bold rounded-pill px-3 shadow float-end"><i
-                                                    class='bx bx-edit'></i></a>
-    
-                                        </div>
-
-                                    <div class="col-md-4 text-start">
-                                        <a href="{{ url('Artikel-hapus', $item->id) }}" class="btn btn-danger fw-bold rounded-pill px-3 shadow"><i
-                                                class="bx bxs-trash" style=color:white></i></a>
-                                    </div>
-                                </div>
-                                </td>
+                                <th scope="col">No</th>
+                                <th scope="col">Judul</th>
+                                <th scope="col">Isi</th>
+                                <th scope="col">Gambar</th>
+                                <th scope="col">Aksi</th>
                             </tr>
-                        @endforeach
-
-                    </tbody>
+                        </thead>
+                        <tbody>
+                            @foreach ($artikel as $index => $item)
+                                <tr>
+                                    <td scope="row">{{ $index + $artikel->firstitem() }}</td>
+                                    <td>{{ $item->judul }}</td>
+                                    <td>{!! $item->isi !!}</td>
+                                    <td class="text-center"><img src="{{ asset('storage/' . $item->image) }}" alt="image" width="100" height="100"></td>
+                                    <td>
+                                        <div>
+                                            <a href="#exampleModalEdit{{ $item->id }}" data-bs-toggle="modal" class="btn btn-primary fw-bold rounded-pill shadow float-end"><i class='bx bx-edit'></i></a>
+                                        </div>
+                                        <div>
+                                            <a href="{{ url('Artikel-hapus', $item->id) }}" class="btn btn-danger fw-bold rounded-pill shadow"><i class="bx bxs-trash" style="color:white"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                 </table>
 {{ $artikel->links() }}
             </div>
@@ -62,11 +53,11 @@
 
         @include('Admin.Artikel.edit')
 
-        {{-- modal tambah data gejala --}}
+        {{-- modal tambah data artikel --}}
         <div class="modal fade" id="exampleModalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog" style="width:125%">
-                <div class="modal-content p-3" style="width:125%">
+            <div class="modal-dialog modal-dialog-centered  modal-lg" >
+                <div class="modal-content p-3">
                     <div class="modal-header hader">
                         <h3 class="modal-title" id="exampleModalLabel">
                             Tambah Data Artikel
@@ -76,7 +67,7 @@
                     <form action=" " method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="judul">Judul</label>
+                            <label for="judul" class="mt-3">Judul</label>
                             <textarea type="text" class="form-control" name="judul" id="judul" placeholder="Masukkan judul"
                                 @error('judul') is-invalid @enderror value="{{ old('judul') }}"></textarea>
                             @error('judul')
@@ -84,7 +75,7 @@
                             @enderror
                         </div>
                         <div class="form-group mb-1">
-                            <label for="isi">isi</label>
+                            <label for="isi" class="mt-3">isi</label>
                             <textarea type="text" class="form-control" name="isi" id="isi" placeholder=""
                                 @error('isi')
                                     is-invalid
@@ -96,7 +87,7 @@
                         </div>
 
                         <div class="form-group mb-1">
-                            <label for="image">Gambar</label>
+                            <label for="image" class="mt-3">Gambar</label>
                             <input type="file" class="form-control" name="image" id="image" placeholder=""
                                 @error('iamge')
                                     is-invalid
