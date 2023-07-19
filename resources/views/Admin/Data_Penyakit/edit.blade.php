@@ -27,7 +27,13 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <input type="text" name="deskripsi" id="edit" class="form-control @error('deskripsi') is-invalid @enderror" value="{{ $item->deskripsi }}" required>
+                        @error('deskripsi')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                     
                     <div class="form-group">
                         <label>Solusi</label>

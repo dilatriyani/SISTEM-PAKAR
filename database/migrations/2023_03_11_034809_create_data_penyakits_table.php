@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('kd_penyakit');
             $table->string('nama_penyakit');
+            $table->longText('deskripsi');
             $table->longText('solusi');
             $table->timestamps();
         });

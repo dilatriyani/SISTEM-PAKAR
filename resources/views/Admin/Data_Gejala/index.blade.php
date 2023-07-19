@@ -87,21 +87,30 @@
                         <div class="modal-body">
                             <div class="form-group mb-1">
                                 <label for="nama_gejala">Tambahkan Gejala</label>
-                                <textarea type="text" class="form-control" name="nama_gejala"  placeholder=""
-                                    @error('nama_gejala') is-invalid @enderror value="{{ old('nama_gejala') }}"></textarea>
+                                <textarea type="text" class="form-control" name="nama_gejala" placeholder=""
+                                    @error('nama_gejala') is-invalid @enderror>{{ old('nama_gejala') }}</textarea>
                                 @error('nama_gejala')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                            </div>
-
+                        
                             <div class="form-group mb-1">
+                                <label for="kd_gejala">Kode Gejala</label>
+                                <input type="text" class="form-control" name="kd_gejala" id="kd_gejala"
+                                    placeholder="Input Kode Gejala" readonly value="{{ $kd_gejala }}">
+                                @error('kd_gejala')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                            {{-- <div class="form-group mb-1">
                                 <label for="gejala">Kode gejala</label>
                                 <input type="text" class="form-control" name="kd_gejala" id="kd_gelaja" placeholder=""
                                     @error('kd_gejala') is-invalid @enderror value="{{ old('kd_gejala') }}">
                                 @error('kd_gejala')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                         </div>
                         

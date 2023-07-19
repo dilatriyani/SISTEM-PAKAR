@@ -10,14 +10,30 @@ class data_penyakitController extends Controller
 {
     public function index()
     {
+        $latestKode = data_penyakit::orderBy('id', 'desc')->first(); // Mengambil data penyakit dengan kode terakhir
+        $lastNumber = $latestKode ? intval(substr($latestKode->kd_penyakit, 1)) : 0; // Mendapatkan angka terakhir dari kode penyakit
+    
+        $nextNumber = $lastNumber + 1; // Membuat angka berikutnya
+    
+        $kd_penyakit = 'P' . $nextNumber; // Membuat kode penyakit baru
+    
         $data = [
             "data_penyakit" => data_penyakit::paginate(5),
             "data_gejala" => gejala::all(),
-
+            "kd_penyakit" => $kd_penyakit, // Mengirimkan data kode penyakit terbaru ke view
         ];
-
+    
         return view('Admin.Data_Penyakit.index', $data);
     }
+    // {
+    //     $data = [
+    //         "data_penyakit" => data_penyakit::paginate(5),
+    //         "data_gejala" => gejala::all(),
+
+    //     ];
+
+    //     return view('Admin.Data_Penyakit.index', $data);
+    // }
 
 
     // public function store(request $request)
@@ -46,6 +62,7 @@ class data_penyakitController extends Controller
         data_penyakit::create([
             'kd_penyakit' => $request->kd_penyakit,
             'nama_penyakit' => $request->nama_penyakit,
+            'deskripsi' => $request->deskripsi,
             'solusi' => $request->solusi,
         ]);
         return redirect()->back()->with('success', 'Data penyakit berhasil ditambahkan!');
@@ -65,6 +82,7 @@ class data_penyakitController extends Controller
         $data_penyakit = data_penyakit::findOrFail($id);
         $data_penyakit->kd_penyakit = $request->kd_penyakit;
         $data_penyakit->nama_penyakit = $request->nama_penyakit;
+        $data_penyakit->deskripsi = $request->deskripsi;
         $data_penyakit->solusi = $request->solusi;
         $data_penyakit->save();
 

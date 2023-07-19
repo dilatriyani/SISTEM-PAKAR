@@ -11,14 +11,31 @@ class data_gejalaController extends Controller
 {
     public function index()
     {
+        $latestKode = gejala::orderBy('id', 'desc')->first(); // Mengambil data penyakit dengan kode terakhir
+        $lastNumber = $latestKode ? intval(substr($latestKode->kd_gejala, 1)) : 0; // Mendapatkan angka terakhir dari kode penyakit
+    
+        $nextNumber = $lastNumber + 1; // Membuat angka berikutnya
+    
+        $kd_gejala = 'G0' . $nextNumber; // Membuat kode penyakit baru
+    
         $data = [
-            "data_gejala" => gejala::paginate(5),
             "data_penyakit" => data_penyakit::all(),
-            // "rule" => Rule::all(),
+            "data_gejala" => gejala::paginate(5),
+            "kd_gejala" => $kd_gejala, // Mengirimkan data kode penyakit terbaru ke view
         ];
-
+    
         return view('Admin.Data_Gejala.index', $data);
     }
+    
+    // {
+    //     $data = [
+    //         "data_gejala" => gejala::paginate(5),
+    //         "data_penyakit" => data_penyakit::all(),
+    //         // "rule" => Rule::all(),
+    //     ];
+
+    //     return view('Admin.Data_Gejala.index', $data);
+    // }
 
     public function store(Request $request)
     {

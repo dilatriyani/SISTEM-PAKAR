@@ -27,6 +27,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Kode</th>
                             <th scope="col">Nama Penyakit</th>
+                            <th scope="col">Deskripsi</th>
                             <th scope="col">Solusi</th>
                             <th scope="col">Aksi</th>
                         </tr>
@@ -37,6 +38,7 @@
                                 <td scope="row">{{ $index + $data_penyakit->firstitem() }}</td>
                                 <td>{{ $item->kd_penyakit }}</td>
                                 <td>{{ $item->nama_penyakit }}</td>
+                                <td>{!! $item->deskripsi !!}</td>
                                 <td>{!! $item->solusi !!}</td>
                                 <td style="size: 30px;" class="row">
                                     <div class="col-md-4 text-end">
@@ -73,54 +75,61 @@
 
         {{-- modal tambah data_penyakit --}}
         <div class="modal fade" id="exampleModalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" style="width: 125%">
-                <div class="modal-content p-3" style="width: 125%">
-                    <div class="modal-header hader">
-                        <h3 class="modal-title" id="exampleModalLabel">
-                            Tambah Data Penyakit
-                        </h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ url('/Admin/Data_Penyakit') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group mb-1">
-                                <label for="kd_penyakit">Kode Penyakit</label>
-                                <input type="text" class="form-control" name="kd_penyakit" id="kd_penyakit"
-                                    placeholder="Input Kode Penyakit" @error('kd_penyakit') is-invalid @enderror
-                                    value="{{ old('kd_penyakit') }}">
-                                @error('kd_penyakit')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group mb-1">
-                                <label for="nama_penyakit">Nama Penyakit</label>
-                                <input type="text" class="form-control" name="nama_penyakit" id="nama_penyakit"
-                                    placeholder="" @error('nama_penyakit') is-invalid @enderror
-                                    value="{{ old('nama_penyakit') }}">
-                                @error('nama_penyakit')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group mb-1">
-                                <label for="solusi">Solusi</label>
-                                <textarea name="solusi" id="solusi" cols="30" rows="10"></textarea>
-
-                            </div>
-                        </div>
-                        <div class="modal-footer d-md-block">
-                            <button type="submit" class="btn btn-primary waves-effect waves-light"
-                            onclick="disable1(this);">
-                            <span id="buttonText">Simpan</span>
-                        </button>
-
-                        </div>
-                    </form>
+        aria-hidden="true">
+        <div class="modal-dialog" style="width: 125%">
+            <div class="modal-content p-3" style="width: 125%">
+                <div class="modal-header hader">
+                    <h3 class="modal-title" id="exampleModalLabel">
+                        Tambah Data Penyakit
+                    </h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form action="{{ url('/Admin/Data_Penyakit') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group mb-1">
+                            <label for="kd_penyakit">Kode Penyakit</label>
+                            
+                                <input type="text" class="form-control" name="kd_penyakit" id="kd_penyakit"
+                                    placeholder="Input Kode Penyakit" readonly value="{{ $kd_penyakit }}">
+                            @error('kd_penyakit')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-1">
+                            <label for="nama_penyakit">Nama Penyakit</label>
+                            <input type="text" class="form-control" name="nama_penyakit" id="nama_penyakit"
+                                placeholder="" @error('nama_penyakit') is-invalid @enderror
+                                value="{{ old('nama_penyakit') }}">
+                            @error('nama_penyakit')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-1">
+                            <label for="deskripsi">Deskripsi</label>
+                            <<input type="text" class="form-control" name="deskripsi" id="deskripsi"
+                            placeholder="" @error('deskripsi') is-invalid @enderror
+                            value="{{ old('deskripsi') }}">
+
+                        </div>
+
+                        <div class="form-group mb-1">
+                            <label for="solusi">Solusi</label>
+                            <textarea name="solusi" id="solusi" cols="30" rows="10"></textarea>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer d-md-block">
+                        <button type="submit" class="btn btn-primary waves-effect waves-light"
+                        onclick="disable1(this);">
+                        <span id="buttonText">Simpan</span>
+                    </button>
+
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
         {{-- end --}}
 
 
