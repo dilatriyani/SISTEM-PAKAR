@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('kd_penyakit');
             $table->string('nama_penyakit');
-            $table->string('solusi');
+            $table->longText('solusi');
             $table->timestamps();
         });
     }

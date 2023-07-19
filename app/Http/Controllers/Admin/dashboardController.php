@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Artikel;
-use App\Models\Gejala;
 use App\Models\Rule;
+use App\Models\Gejala;
+use App\Models\Artikel;
+use Illuminate\Http\Request;
 use App\Models\data_penyakit;
+use Sabberworm\CSS\Value\URL;
+use App\Models\HistoryDiagnosa;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+
 class dashboardController extends Controller
 {
     public function index()
@@ -52,15 +55,19 @@ class dashboardController extends Controller
     {
         $last = Gejala::latest()->first();
         $penyakit_total = data_penyakit::get()->count();
-        $next = $request->id_gejala + 1;
+        $id_gejala = $request->id_gejala;
+        $next = $id_gejala + 1;
         if($next != $last->id) {
             if($request->answer == 1){
+                # save gejala selected
+                $gejala = Gejala::findOrFail($id_gejala);
+                Session::push('gejala', $gejala->nama_gejala);
                 for ($i=1; $i <=$penyakit_total; $i++) {
                     $rule = Rule::query()->findOrFail($i);
                     $daftar_gejala = explode(',', $rule->daftar_gejala);
                     foreach ($daftar_gejala as $gejala) {
                         $daftar_gejala = explode(',', $rule->daftar_gejala);
-                        if($gejala == $request->id_gejala){
+                        if($gejala == $id_gejala){
                             Session::push('penyakit', $rule->id_penyakit);
                             break;
                         }
@@ -88,8 +95,14 @@ class dashboardController extends Controller
             $user_name = Session::get('user_name');
             $user_age = Session::get('user_age');
             $user_address = Session::get('user_address');
+            $gejala_list = Session::get('gejala');
 
-            // dd($user_name, $user_age, $user_address);
+            HistoryDiagnosa::create([
+                'nama' => last($user_name),
+                'umur' => last($user_age),
+                'alamat' => last($user_address),
+                'penyakit' => $penyakit_result->nama_penyakit,
+            ]);
 
             return view('Pengguna.Diagnosa.Hasil')->with([
                 'penyakit' => $penyakit_result,
@@ -97,8 +110,23 @@ class dashboardController extends Controller
                 'name' => last($user_name),
                 'age' => last($user_age),
                 'address' => last($user_address),
+                'gejala_list' => $gejala_list,
             ]);
         }
+    }
+
+    public function GeneratePdf(){
+
+        $baseUrl = URL::to('/'); // Get the base URL
+        $additionalPath = '/Pengguna/Diagnosa/Hasil'; // Additional path to append
+        $url = $baseUrl . $additionalPath; // Combine the base URL and additional path
+        Browsershot::url($url)
+            ->fullPage()
+            ->save('screenshot.png');
+        $screenshotPath = public_path('screenshot.png'); // Path to the captured screenshot
+        $pdf = PDF::loadView('report', compact('screenshotPath'));
+
+        return $pdf->download('report.pdf');
     }
 
     public function info_penyakit()

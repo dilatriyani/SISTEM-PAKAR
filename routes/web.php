@@ -12,7 +12,6 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\ArtikelDetailController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\PrintController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +33,7 @@ Route::get('/Admin/Dashboard', [dashboardController::class, 'index']);
 Route::post('/Pengguna/Diagnosa/Mulai', [dashboardController::class, 'getUserSess']);
 Route::get('/Pengguna/Diagnosa/{id}', [dashboardController::class, 'question']);
 Route::post('/Pengguna/Diagnosa/Hasil', [dashboardController::class, 'result']);
-
+Route::post('/Pengguna/Diagnosa/Cetak', [dashboardController::class, 'GeneratePdf']);
 Route::get('/Pengguna/Layouts/tentang', [dashboardController::class, 'tentang']);
 // Route::get('/Pengguna/Diagnosa/Hasil', [dashboardController::class, 'hasil']);
 
@@ -89,14 +88,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Admin/Dashboard',  [dashboardController::class, 'index']);
     Route::get('/logout', [LoginController::class, 'logout']);
 });
+// Route::get('/Profile', 'ProfileController@index');
+// Route::patch('/Profile/{id}', 'ProfileController@update')->name('profile.update');
+
 
 Route::controller(ProfileController::class)->group(function(){
     Route::get('/Profile','index');
     Route::patch('/Profile{id}','update')->name('update');
 });
-
-
-
+// Route::put('/profile/update', 'ProfileController@update')->name('profile.update');
 
 // Route::resource("/Profile", ProfileController::class);
 // require __DIR__.'/auth.php';

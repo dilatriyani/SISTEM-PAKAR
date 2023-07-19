@@ -6,56 +6,62 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 class ProfileController extends Controller
 {
     public function index()
     {
-        $user = User::findOrFail(Auth::id());
-
-        return view("Admin.Profile.profile", compact('user'));
+        $user = Auth::user();
+        return view('Admin.Profile.profile', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        request()->validate([
-            'name'       => 'required|string|min:2|max:100',
-            'email'      => 'required|email|unique:users,email, ' . $id . ',id',
-            
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-       
-
-        // if ($request->filled('old_password')) { //update password lama ke baru
-        //     if (Hash::check($request->old_password, $user->password)) {
-        //         $user->update([
-        //             'password' => Hash::make($request->password)
-        //         ]);
-        //     }else {
-        //         return back()
-        //             ->withErrors(['old_password' => __('Please enter the correct password')])
-        //             ->withInput();
-        //     }
-        // }
-
-        if(request()->hasFile('photo')) {
-            if($user->photo && file_exists(storage_path('app/public/photos/' . $user->photo))){
-                Storage::delete('app/public/photos/'.$user->photo);
+        if ($request->hasFile('photo')) {
+            // Delete previous photo if exists
+            if ($user->photo) {
+                Storage::delete('photos/' . $user->photo);
             }
 
-            $file = $request->file('photo');
-            $fileName = $file->hashName() . '.' . $file->getClientOriginalExtension();
-            $request->photo->move(storage_path('app/public/photos'), $fileName);
-            //foto yang sudah diupload akan masuk ke folder storage/public/photos
-            $user->photo = $fileName;
+            $photo = $request->file('photo');
+            $photoName = time() . '.' . $photo->getClientOriginalExtension();
+            $photo->storeAs('photos', $photoName);
+            $user->photo = $photoName;
         }
 
         $user->save();
 
-        return back()->with('status', 'Profile berhasil di updated!');
+        return redirect()->route('profile')->with('success', 'Profile updated successfully.');
     }
 
+    public function changePassword(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        if (Hash::check($request->input('current_password'), $user->password)) {
+            $user->password = Hash::make($request->input('new_password'));
+            $user->save();
+
+            return redirect()->route('profile')->with('success', 'Password changed successfully.');
+        } else {
+            return redirect()->route('profile')->with('error', 'Current password is incorrect.');
+        }
+    }
 }

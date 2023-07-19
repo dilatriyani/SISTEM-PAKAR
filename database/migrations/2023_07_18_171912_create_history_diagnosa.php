@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('history_dignosa', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('role',['admin', 'pakar']); 
-            $table->string('photo')->nullable();
-            $table->rememberToken();
+            $table->string('nama');
+            $table->string('umur');
+            $table->string('penyakit'); //TODO: buat jadi foreign key ke table penyakit
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('history_diagnosa');
     }
 };
