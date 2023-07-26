@@ -7,16 +7,27 @@ use App\Models\Gejala;
 use App\Models\Artikel;
 use Illuminate\Http\Request;
 use App\Models\data_penyakit;
-use Sabberworm\CSS\Value\URL;
 use App\Models\HistoryDiagnosa;
+use Illuminate\Support\Facades\URL;
+use Spatie\Browsershot\Browsershot;
+// use PDF;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 
 class dashboardController extends Controller
 {
     public function index()
     {
-        return view('Admin.Dashboard.body');
+        $totalAdmins = User::count();
+        $Penyakit = data_penyakit::count();
+        $Gejala = Gejala::count();
+        $Konsultasi = HistoryDiagnosa::count();
+    
+        // Pass the count to the view
+        return view('Admin.Dashboard.body', compact('totalAdmins', 'Penyakit', 'Gejala', 'Konsultasi'));
+       
     }
 
     // public function diagnosa()
@@ -24,8 +35,20 @@ class dashboardController extends Controller
     //     return view('Pengguna.Diagnosa.form');
     // }
 
-    public function getUserSess(Request $request) {
-        if($request){
+    // public function getUserSess(Request $request) {
+    //     if($request->has('name') && $request->has('age') && $request->has('address')) {
+    //         $request->session()->flush();
+    //         Session::put('user_name', $request->name);
+    //         Session::put('user_age', $request->age);
+    //         Session::put('user_address', $request->address);
+    //         return redirect('/Pengguna/Diagnosa/1');
+    //     }
+    // }
+    
+
+    public function getUserSess(Request $request)
+    {
+        if ($request) {
             $request->session()->flush();
             Session::push('user_name', $request->name);
             Session::push('user_age', $request->age);
@@ -39,7 +62,7 @@ class dashboardController extends Controller
         $user_name = Session::get('user_name');
         $user_age = Session::get('user_age');
         $user_address = Session::get('user_address');
-        if($id == null){
+        if ($id == null) {
             $id = 1;
         }
         $gejala = Gejala::query()->findOrFail($id);
@@ -51,35 +74,39 @@ class dashboardController extends Controller
         ]);
     }
 
-    public function result(Request $request, )
+    public function result(Request $request,)
     {
         $last = Gejala::latest()->first();
         $penyakit_total = data_penyakit::get()->count();
         $id_gejala = $request->id_gejala;
         $next = $id_gejala + 1;
-        if($next != $last->id) {
-            if($request->answer == 1){
-                # save gejala selected
-                $gejala = Gejala::findOrFail($id_gejala);
-                Session::push('gejala', $gejala->nama_gejala);
-                for ($i=1; $i <=$penyakit_total; $i++) {
-                    $rule = Rule::query()->findOrFail($i);
-                    $daftar_gejala = explode(',', $rule->daftar_gejala);
-                    foreach ($daftar_gejala as $gejala) {
+        if ($next < $last->id) {
+            $gejala = Gejala::find($id_gejala);
+            if ($gejala) {
+                $next++;
+            } else {
+                if ($request->answer == 1) {
+                    # save gejala selected
+                    // $gejala = Gejala::findOrFail($id_gejala);
+                    Session::push('gejala', $gejala->nama_gejala);
+                    for ($i = 1; $i <= $penyakit_total; $i++) {
+                        $rule = Rule::query()->findOrFail($i);
                         $daftar_gejala = explode(',', $rule->daftar_gejala);
-                        if($gejala == $id_gejala){
-                            Session::push('penyakit', $rule->id_penyakit);
-                            break;
+                        foreach ($daftar_gejala as $gejala) {
+                            $daftar_gejala = explode(',', $rule->daftar_gejala);
+                            if ($gejala == $id_gejala) {
+                                Session::push('penyakit', $rule->id_penyakit);
+                                break;
+                            }
                         }
                     }
                 }
             }
-            return redirect('/Pengguna/Diagnosa/'.$next);
-        }
-        else{
+            return redirect('/Pengguna/Diagnosa/' . $next);
+        } else {
             $penyakit = Session::get('penyakit');
             $arrayLength = count($penyakit);
-            if($arrayLength == 0){
+            if ($arrayLength == 0) {
                 return redirect('/Pengguna/Diagnosa/1')->with(['message' => 'Pilih setidaknya 1 Gejala!']);
             }
 
@@ -102,6 +129,8 @@ class dashboardController extends Controller
                 'umur' => last($user_age),
                 'alamat' => last($user_address),
                 'penyakit' => $penyakit_result->nama_penyakit,
+                'persentase' => strval($score),
+                'solusi' => $penyakit_result->solusi,
             ]);
 
             return view('Pengguna.Diagnosa.Hasil')->with([
@@ -115,7 +144,8 @@ class dashboardController extends Controller
         }
     }
 
-    public function GeneratePdf(){
+    public function GeneratePdf()
+    {
 
         $baseUrl = URL::to('/'); // Get the base URL
         $additionalPath = '/Pengguna/Diagnosa/Hasil'; // Additional path to append

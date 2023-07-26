@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -42,8 +44,8 @@ class ProfileController extends Controller
         }
 
         $user->save();
+        return redirect()->back();
 
-        return redirect()->route('profile')->with('success', 'Profile updated successfully.');
     }
 
     public function changePassword(Request $request)
@@ -59,9 +61,9 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->input('new_password'));
             $user->save();
 
-            return redirect()->route('profile')->with('success', 'Password changed successfully.');
+            return redirect()->back()->with('success', 'Password changed successfully.');
         } else {
-            return redirect()->route('profile')->with('error', 'Current password is incorrect.');
+            return redirect()->back()->with('error', 'Current password is incorrect.');
         }
     }
 }

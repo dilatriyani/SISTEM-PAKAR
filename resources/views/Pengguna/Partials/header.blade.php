@@ -9,7 +9,7 @@
   <nav id="navbar" class="navbar">
     <ul>
       <li><a href="/">Home</a></li>
-      {{-- <li data-bs-toggle="modal" data-bs-target="#exampleModal">Konsultasi</li> --}}
+      <li><a href="{{ url('/Penggunaan') }}">Info Penggunaan</a></li>
       <li><a href="{{ url('/Pengguna/Layouts/tentang') }}">Tentang</a></li>
       <li><a href="{{ url('/Pengguna/Layouts') }}">Artikel</a></li>
      

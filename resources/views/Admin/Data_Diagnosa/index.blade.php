@@ -20,17 +20,28 @@
                         <label for="filterEndDate" class="form-label">Hingga Tanggal:</label>
                         <input type="date" id="filterEndDate" class="form-control">
                     </div>
-                    <div class="col-md-3">
-                        <label for="filterPeriode" class="form-label">Periode:</label>
-                        <select id="filterPeriode" class="form-control">
-                            <option value="bulan">Per Bulan</option>
-                            <option value="minggu">Per Minggu</option>
-                            <option value="tahun">Per Tahun</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
+                   
+                    <div class="col-md-5">
                         <button class="btn btn-primary float-end">Cetak</button>
                     </div>
+                    <div class="col-md-1">
+                       
+                    <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>Filter</h6>
+                            </li>
+
+                            <li><a class="dropdown-item" href="#">hari ini</a></li>
+                            <li><a class="dropdown-item" href="#">bulan ini</a></li>
+                            <li><a class="dropdown-item" href="#">tahun ini</a></li>
+                        </ul>
+                    </div>
+                    </div>
+
+                    
                 </div>
 
                 <table class="table table-hover">

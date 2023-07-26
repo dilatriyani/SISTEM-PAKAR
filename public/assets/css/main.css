@@ -36,6 +36,11 @@ body {
   color: var(--color-default);
 }
 
+.justify-text {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 a {
   color: var(--color-primary);
   text-decoration: none;

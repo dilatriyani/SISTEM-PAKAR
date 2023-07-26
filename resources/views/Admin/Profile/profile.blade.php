@@ -8,11 +8,10 @@
                     <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                             @if ($user->photo)
-                                <img src="{{ asset('storage/photos/' . $user->photo) }}" alt=""
-                                    style="width: 130px; height:130px" class="img-thumbnail rounded-circle mx-auto d-block">
+                            <img src="{{ asset('storage/images/' . $user->image) }}"
+                            alt="{{ $user->name }}" class="img-thumbnail" width="80" height="80">
                             @else
-                                <img src="/../../assets/admin/images/profile.png" alt=""
-                                    style="width: 130px; height:130px" class="img-thumbnail rounded-circle mx-auto d-block">
+                            No image available.
                             @endif
                             <div class="person-name">
                                 <h2 class="text-center fs-4 my-2">{{ Auth::user()->name }}</h2>

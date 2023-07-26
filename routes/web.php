@@ -2,16 +2,17 @@
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\RuleController;
+use App\Http\Controllers\PenggunaanController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\ArtikelController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\ArtikelDetailController;
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\data_adminController;
 use App\Http\Controllers\Admin\data_gejalaController;
-use App\Http\Controllers\Admin\data_penyakitController;
 use App\Http\Controllers\Admin\data_diagnosaController;
-use App\Http\Controllers\Admin\RuleController;
-use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\ArtikelController;
-use App\Http\Controllers\ArtikelDetailController;
-use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\data_penyakitController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +30,21 @@ Route::get('/', function () {
 });
 
 Route::get('/Admin/Dashboard', [dashboardController::class, 'index']);
-// Route::get('/Pengguna/Diagnosa', [dashboardController::class, 'diagnosa']);
+// Route::post('/Pengguna/Diagnosa', [dashboardController::class, 'getUserSess']);
+// Route::get('/Pengguna/Diagnosa/Mulai', [dashboardController::class, 'getUserSess']);
+// Route::get('/Pengguna/Diagnosa/Mulai', [dashboardController::class, 'getUserSess']);
+// Route::get('/Pengguna/Diagnosa/{id}', [dashboardController::class, 'question']);
+// Route::post('/Pengguna/Diagnosa/Hasil', [dashboardController::class, 'result']);
+// Route::post('/Pengguna/Diagnosa/Cetak', [dashboardController::class, 'GeneratePdf']);
+// Route::get('/Pengguna/Layouts/tentang', [dashboardController::class, 'tentang']);
+// Route::get('/Pengguna/Diagnosa/Hasil', [dashboardController::class, 'hasil']);
 Route::post('/Pengguna/Diagnosa/Mulai', [dashboardController::class, 'getUserSess']);
 Route::get('/Pengguna/Diagnosa/{id}', [dashboardController::class, 'question']);
 Route::post('/Pengguna/Diagnosa/Hasil', [dashboardController::class, 'result']);
 Route::post('/Pengguna/Diagnosa/Cetak', [dashboardController::class, 'GeneratePdf']);
 Route::get('/Pengguna/Layouts/tentang', [dashboardController::class, 'tentang']);
-// Route::get('/Pengguna/Diagnosa/Hasil', [dashboardController::class, 'hasil']);
 
-
+Route::get('/Penggunaan', [PenggunaanController::class, 'index']);
 Route::get('/Pengguna/Layouts', [dashboardController::class, 'info_penyakit']);
 Route::get('/Pengguna/Layouts/detail/{id}', [ArtikelDetailController::class, 'index']);
 //crud data_admin
@@ -88,14 +95,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Admin/Dashboard',  [dashboardController::class, 'index']);
     Route::get('/logout', [LoginController::class, 'logout']);
 });
+
+Route::get('/Profile', [ProfileController::class, 'index']);
+// Route::get('/Profile', 'ProfileController@index');
+Route::post('/Profile/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::post('/Profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+// Route::post('/Profile/update', 'ProfileController@update')->name('profile.update');
+
+
 // Route::get('/Profile', 'ProfileController@index');
 // Route::patch('/Profile/{id}', 'ProfileController@update')->name('profile.update');
 
 
-Route::controller(ProfileController::class)->group(function(){
-    Route::get('/Profile','index');
-    Route::patch('/Profile{id}','update')->name('update');
-});
+// Route::controller(ProfileController::class)->group(function(){
+//     Route::get('/Profile','index');
+//     Route::patch('/Profile{id}','update')->name('update');
+// });
 // Route::put('/profile/update', 'ProfileController@update')->name('profile.update');
 
 // Route::resource("/Profile", ProfileController::class);

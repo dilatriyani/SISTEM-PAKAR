@@ -19,11 +19,11 @@
                 </div>
             @endif
 
-            <div class="card">
+            <div class="card mt-4">
                 <div class="card-body">
                     <!-- Table with hoverable rows -->
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover mt-4">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -41,12 +41,17 @@
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->role }}</td>
                                         <td class="p-2">
-                                            <div class="col-md-4 text-start">
+                                            <div class="">
+                                                <a href="#exampleModalEdit{{ $item->id }}" data-bs-toggle="modal"
+                                                    class="btn btn-primary fw-bold rounded-pill px-4 shadow float-end"><i
+                                                        class='bx bx-edit'></i></a>
+                                            </div>
+                                            <div class="">
                                                 <form onsubmit="return confirm('Apakah anda yakin ?');"
                                                     action="{{ route('Data_Admin.destroy', $item->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn btn-danger" type="submit">
+                                                    <button class="btn btn-danger  fw-bold rounded-pill px-4 shadow" type="submit" >
                                                         <a href="/Data_Admin/{{ $item->id }}" method="post"
                                                             onsubmit="return confirm('Apakah anda yakin ?');"><i
                                                                 class="bx bxs-trash" style="color:white"></i>
@@ -65,7 +70,7 @@
                 </div>
             </div>
            
-            
+            @include('Admin.Data_Admin.edit')
 
             {{-- modal tambah admin --}}
             <div class="modal fade" id="exampleModalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -83,7 +88,7 @@
                             <div class="modal-body">
 
                                 <div class="form-group mb-1">
-                                    <label for="name">Name</label>
+                                    <label for="name">Nama</label>
                                     <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Input name" @error('name') is-invalid @enderror value="">
                                     @error('name')

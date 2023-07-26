@@ -60,7 +60,7 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <form method="POST" action="/Pengguna/Diagnosa/Mulai">
+            <form method="GET" action="/Pengguna/Diagnosa/Mulai">
             @csrf
                 <button type="button" class="btn-close px-3 py-3" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body">
