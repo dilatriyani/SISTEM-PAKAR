@@ -13,7 +13,7 @@
       <li><a href="{{ url('/Pengguna/Layouts/tentang') }}">Tentang</a></li>
       <li><a href="{{ url('/Pengguna/Layouts') }}">Artikel</a></li>
      
-      <li><a href="{{ url('/login') }}">Login Admin</a></li>
+      <li><a href="{{ url('/login') }}">Login</a></li>
     </ul>
   </nav><!-- .navbar -->
 

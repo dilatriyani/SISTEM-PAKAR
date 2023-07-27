@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-12">
+                <div class="col-lg-8">
 
                     <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
 
@@ -65,7 +65,7 @@
 
                                 </div>
                             </div>
-                          </div>
+                        </div>
                     </div><!-- # Faq item-->
                 </div>
 

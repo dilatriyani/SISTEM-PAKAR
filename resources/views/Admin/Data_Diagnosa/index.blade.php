@@ -48,27 +48,31 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
+                            <th scope="col">Waktu Diagnosa</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Umur</th>
                             <th scope="col">Alamat</th>
-                            <th scope="col">Penyakit</th>
-                          
+                            <th scope="col">Diagnosa</th>
+                            <th scope="col">Persentase</th>
+                            <th scope="col">Solusi</th>
                             {{-- <th scope="col">Aksi</th> --}}
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($riwayat_diagnosa as $index => $item)
-                            <tr>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <td>{{ $item->umur }}</td>
-                                <td>{{ $item->alamat }}</td>
-                                <td>{{ $item->penyakit }}</td>
-                              
-                                {{-- <td class="p-2">
-                <button class="btn btn-danger col-sm-4">Hapus</button>
-            </td> --}}
-                            </tr>
+                        <tr>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->created_at }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->umur }}</td>
+                            <td>{{ $item->alamat }}</td>
+                            <td>{{ $item->penyakit }}</td>
+                            <td>{{ $item->persentase }}</td>
+                            <td>{{ $item->solusi }}</td>
+                            {{-- <td class="p-2">
+                                <button class="btn btn-danger col-sm-4">Hapus</button>
+                            </td> --}}
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

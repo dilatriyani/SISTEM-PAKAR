@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Rule;
-use App\Models\Gejala;
+use App\Models\gejala;
 use App\Models\Artikel;
 use Illuminate\Http\Request;
 use App\Models\data_penyakit;
@@ -22,11 +22,11 @@ class dashboardController extends Controller
     {
         $totalAdmins = User::count();
         $Penyakit = data_penyakit::count();
-        $Gejala = Gejala::count();
+        $gejala = gejala::count();
         $Konsultasi = HistoryDiagnosa::count();
     
         // Pass the count to the view
-        return view('Admin.Dashboard.body', compact('totalAdmins', 'Penyakit', 'Gejala', 'Konsultasi'));
+        return view('Admin.Dashboard.body', compact('totalAdmins', 'Penyakit', 'gejala', 'Konsultasi'));
        
     }
 
@@ -46,6 +46,7 @@ class dashboardController extends Controller
     // }
     
 
+ 
     public function getUserSess(Request $request)
     {
         if ($request) {
@@ -65,7 +66,7 @@ class dashboardController extends Controller
         if ($id == null) {
             $id = 1;
         }
-        $gejala = Gejala::query()->findOrFail($id);
+        $gejala = gejala::query()->findOrFail($id);
         return view('Pengguna.Diagnosa.form')->with([
             'gejala' => $gejala,
             'user_name' => last($user_name),
@@ -76,18 +77,18 @@ class dashboardController extends Controller
 
     public function result(Request $request,)
     {
-        $last = Gejala::latest()->first();
+        $last = gejala::latest()->first();
         $penyakit_total = data_penyakit::get()->count();
         $id_gejala = $request->id_gejala;
         $next = $id_gejala + 1;
         if ($next < $last->id) {
-            $gejala = Gejala::find($id_gejala);
+            $gejala = gejala::find($id_gejala);
             if ($gejala) {
                 $next++;
             } else {
                 if ($request->answer == 1) {
                     # save gejala selected
-                    // $gejala = Gejala::findOrFail($id_gejala);
+                    // $gejala = gejala::findOrFail($id_gejala);
                     Session::push('gejala', $gejala->nama_gejala);
                     for ($i = 1; $i <= $penyakit_total; $i++) {
                         $rule = Rule::query()->findOrFail($i);
@@ -107,7 +108,7 @@ class dashboardController extends Controller
             $penyakit = Session::get('penyakit');
             $arrayLength = count($penyakit);
             if ($arrayLength == 0) {
-                return redirect('/Pengguna/Diagnosa/1')->with(['message' => 'Pilih setidaknya 1 Gejala!']);
+                return redirect('/Pengguna/Diagnosa/1')->with(['message' => 'Pilih setidaknya 1 gejala!']);
             }
 
             $countArray = array_count_values($penyakit);
@@ -144,20 +145,6 @@ class dashboardController extends Controller
         }
     }
 
-    public function GeneratePdf()
-    {
-
-        $baseUrl = URL::to('/'); // Get the base URL
-        $additionalPath = '/Pengguna/Diagnosa/Hasil'; // Additional path to append
-        $url = $baseUrl . $additionalPath; // Combine the base URL and additional path
-        Browsershot::url($url)
-            ->fullPage()
-            ->save('screenshot.png');
-        $screenshotPath = public_path('screenshot.png'); // Path to the captured screenshot
-        $pdf = PDF::loadView('report', compact('screenshotPath'));
-
-        return $pdf->download('report.pdf');
-    }
 
     public function info_penyakit()
     {

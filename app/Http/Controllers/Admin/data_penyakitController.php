@@ -11,7 +11,7 @@ class data_penyakitController extends Controller
     public function index()
 
     {
-        $totalAdmins = User::count();
+        // $totalAdmins = User::count();
         $latestKode = data_penyakit::orderBy('id', 'desc')->first(); // Mengambil data penyakit dengan kode terakhir
         $lastNumber = $latestKode ? intval(substr($latestKode->kd_penyakit, 1)) : 0; // Mendapatkan angka terakhir dari kode penyakit
     

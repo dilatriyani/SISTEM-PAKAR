@@ -167,6 +167,9 @@ return [
         /*
          * Package Service Providers...
          */
+        // Barryvdh\Snappy\ServiceProvider::class,
+        // Spatie\Browsershot\BrowsershotServiceProvider::class,
+
 
         /*
          * Application Service Providers...

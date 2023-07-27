@@ -7,7 +7,7 @@
                 <h2>Hello!! Selamat datang di <span>EXSISC</span></h2>
                 <p>Exsisc adalah aplikasi sistem pakar untuk mengidentifikasi dini resiko penyakit kolestrol</p>
                 <div class="d-flex justify-content-center justify-content-lg-start">
-                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn-get-started">Mulai</a>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn-get-started">Konsultasi</a>
                     {{-- <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
                         class="glightbox btn-watch-video d-flex align-items-center"><i
                             class="bi bi-play-circle"></i><span>Watch Video</span></a> --}}
@@ -60,7 +60,39 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <form method="GET" action="/Pengguna/Diagnosa/Mulai">
+            <form method="POST" action="/Pengguna/Diagnosa/Mulai">
+            @csrf
+                <button type="button" class="btn-close px-3 py-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <h5 style="font-color:#3bb1a3,font-size: 25px" align="center" class="mb-3">Isi data dibawah ini
+                        untuk melanjutkan diagnosa</h5>
+                    <div class="card p-4" style="border-color: #3bb1a3">
+                        <div class="mt-3 mb-2">
+                            <label for="exampleFormControlInput1" class="form-label">Nama</label>
+                            <input required type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Usia</label>
+                            <input required type="text" class="form-control" id="age" name="age">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Alamat</label>
+                            <input required type="text" class="form-control" id="address" name="address">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-white" style="background-color: #3bb1a3">Lanjut</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div> <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <form method="POST" action="/Pengguna/Diagnosa/Mulai">
             @csrf
                 <button type="button" class="btn-close px-3 py-3" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body">
