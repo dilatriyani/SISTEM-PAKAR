@@ -27,31 +27,42 @@
   
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/main.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/css/style.css.map')}}" rel="stylesheet">
+    <link href="{{ asset('css/css/responsive.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/css/font-awesome.min.css')}}" rel="stylesheet">
   
-    <!-- =======================================================
-    * Template Name: Impact - v1.2.0
-    * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+    <link rel="stylesheet" type="text/css" href="/css/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  
+    <!-- nice select -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+    <!-- datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
+  
+ 
+    
   </head>
 </head>
-<body>
+
   <body>
     <div>
         @include('Pengguna.Partials.header')
         <div>
           @yield('container')
         </div>
+        
         @include('Pengguna.Partials.footer')
     </div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
+    
   </body>
-</body>
-<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-<div id="preloader"></div>
 
 <!-- Vendor JS Files -->
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -64,4 +75,16 @@
 
 <!-- Template Main JS File -->
 <script src="{{ asset('assets/js/main.js')}}"></script>
+
+<script src="{{ asset('css/js/jquery-3.4.1.min.js') }}"></script>
+  <!-- bootstrap js -->
+  <script src="{{ asset('css/js/bootstrap.js') }}"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <!-- datepicker -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+  <!-- custom js -->
+  <script src="{{ asset('css/js/custom.js') }}"></script>
 </html>

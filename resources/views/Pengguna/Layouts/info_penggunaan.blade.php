@@ -12,8 +12,10 @@
                 <div class="col-md-4">
                   <div class="card" style="height:40rem;">
                     <div class="card-body">
-                        <div class="text-center p-3 mt-3" style="font-size: 45px;"><i class="bi bi-1-circle-fill"></i></div>
-                        <h5 class="card-title text-center"><b>Konsultasi</b></h5>
+                      <div class="img-box text-center p-3">
+                        <img src="{{ asset('css/images/doctor.png') }}" alt="" width="75" height="75">
+                      </div>
+                        <h5 class="card-title text-center"><i class="bi bi-1-circle-fill p-2"></i><b>Konsultasi</b></h5>
                         <div class="card-body ">
                             <p class="card-text justify-text mt-1">Langkah untuk melakukan konsultasi penyakit kolestrol
                                 yang pertama dilakukan yaitu memilih menu <b>Konsultasi</b> atau button <b>Mulai</b> pada
@@ -25,8 +27,10 @@
                 <div class="col-md-4">
                   <div class="card" style="height:40rem;">
                     <div class="card-body">
-                        <div class="text-center p-3 mt-3" style="font-size: 45px;"><i class="bi bi-2-circle-fill"></i></div>
-                    <h5 class="card-title text-center"><b>Isi Form</b></h5>
+                      <div class="img-box text-center p-3">
+                        <img src="{{ asset('css/images/forms.png') }}" alt="" width="75" height="75">
+                      </div>
+                    <h5 class="card-title text-center"><i class="bi bi-2-circle-fill p-2"></i><b>Isi Form</b></h5>
                     <div class="card-body ">
                         <p class="card-text justify-text mt-1">Langkah kedua untuk melakukan konsultasi penyakit kolestrol
                             pada aplikasi EXSISC yaitu mengisi data diri pada form konsultasi, formkonsultasi akanmuncul
@@ -39,8 +43,10 @@
                 <div class="col-md-4">
                     <div class="card" style="height:40rem;">
                       <div class="card-body">
-                          <div class="text-center p-3 mt-3" style="font-size: 45px;"><i class="bi bi-3-circle-fill"></i></div>
-                      <h5 class="card-title text-center"><b>Pilih Kondisi</b></h5>
+                        <div class="img-box text-center p-3">
+                          <img src="{{ asset('css/images/check-list.jpg') }}" alt="" width="75" height="75">
+                        </div>
+                      <h5 class="card-title text-center"><i class="bi bi-3-circle-fill p-2"></i><b>Pilih Kondisi</b></h5>
                       <div class="card-body ">
                           <p class="card-text justify-text mt-1">Langkah ketiga untuk melakukan konsultasi penyakit kolestrol
                               pada aplikasi EXSISC yaitu memilih gejala atau faktor penyebab yang dialamai, setelah Anda memilih kondisi sesuai yang anda alami dan anda rasakankemudian sistem akan meproses identifikasi penyakit menggunakan metode forward chaining 

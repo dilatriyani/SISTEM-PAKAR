@@ -1,15 +1,8 @@
-<footer id="footer" class="footer">
-<div class="container mt-4">
-  <div class="copyright">
-    &copy; Copyright <strong><span>EXSISC</span></strong>. All Rights Reserved
+<footer class="footer_section">
+  <div class="container">
+    <p>
+      &copy; <span id="displayYear"></span> All Rights Reserved By
+      <a href="">EXICS</a>
+    </p>
   </div>
-  <div class="credits">
-    <!-- All the links in the footer should remain intact. -->
-    <!-- You can delete the links only if you purchased the pro version. -->
-    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/impact-bootstrap-business-website-template/ -->
-    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-  </div>
-</div>
-
-</footer><!-- End Footer --> 
+</footer>

@@ -57,14 +57,15 @@ class GejalaSeeder extends Seeder
             'kd_gejala' =>'G07',
         ]);
 
+       
         Gejala::create([
            
-            'nama_gejala' =>'mengalami nyeri hebat dibagian perut(bukan karena sedang haid)',
+            'nama_gejala' =>'merasakan nyeri atau pegal dibagian tengkuk leher, pundak dan punggung',
             'kd_gejala' =>'G08',
         ]);
         Gejala::create([
            
-            'nama_gejala' =>'merasakan nyeri atau pegal dibagian tengkuk leher, pundak dan punggung',
+            'nama_gejala' =>'mengalami nyeri hebat dibagian perut(bukan karena sedang haid)',
             'kd_gejala' =>'G09',
         ]);
         Gejala::create([
@@ -80,7 +81,7 @@ class GejalaSeeder extends Seeder
 
         Gejala::create([
            
-            'nama_gejala' =>'memiliki tumpukanlemak kuning pada area kelopak mata',
+            'nama_gejala' =>'memiliki tumpukan lemak kuning pada area kelopak mata',
             'kd_gejala' =>'G012',
         ]);
         Gejala::create([
